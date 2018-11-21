@@ -18,7 +18,7 @@ a:hover,
 a:focus,
 a:active,
 a.active {
-  color: #9D95BC;
+  color: #657487;
   outline: none;
 }
 pr1{
@@ -182,54 +182,7 @@ section t{
     font-weight: 700;
 }
 
-.projects-title{
-    font-family:'Roboto', sans-serif;text-align:center;font-size:16px;
-}
-.projects-subtitle{
-    text-align:center;font-size:12.8px;
-}
-.projects-software{font-family:'Roboto' , sans-serif;font-weight:300;text-align:center;font-size:12.8px;margin-bottom:20px;
-}
-#projects .projects-item {
-  margin: 0 0 15px;
-  right: 0;
-}
-#projects .projects-item .projects-link {
-  display: block;
-  position: relative;
-  max-width: 400px;
-  margin: 0 auto;
-}
-#projects .projects-item .projects-link .caption {
-  background: rgba(187, 178, 206, 0.9);
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  transition: all ease 0.5s;
-  -webkit-transition: all ease 0.5s;
-  -moz-transition: all ease 0.5s;
-}
-#projects .projects-item .projects-link .caption:hover {
-  opacity: 1;
-}
-#projects .projects-item .projects-link .caption .caption-content {
-  position: absolute;
-  width: 100%;
-  height: 20px;
-  font-size: 20px;
-  text-align: center;
-  top: 50%;
-  margin-top: -12px;
-  color: white;
-}
-#projects .projects-item .projects-link .caption .caption-content i {
-  margin-top: -12px;
-}
-#projects .projects-item .projects-link .caption .caption-content h3,
-#portfolio .portfolio-item .projects-link .caption .caption-content h4 {
-  margin: 0;
-}
+
 #projects * {
   z-index: 2;
 }
