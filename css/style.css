@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /*!
  * Start Bootstrap - Freelancer v3.3.7+1 (http://startbootstrap.com/template-overviews/freelancer)
  * Copyright 2013-2016 Start Bootstrap
@@ -238,3 +239,245 @@ footer .footer-col {
     height: 55px;
     width: 55px;
 }
+=======
+/*!
+ * Start Bootstrap - Freelancer v3.3.7+1 (http://startbootstrap.com/template-overviews/freelancer)
+ * Copyright 2013-2016 Start Bootstrap
+ * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
+ */
+body {
+  font-family: 'Roboto','Roboto Condensed', Helvetica, Arial, sans-serif;
+  overflow-x: hidden;
+}
+p {
+  font-size: 20px;
+}
+p.small {
+  font-size: 16px;
+}
+a,
+a:hover,
+a:focus,
+a:active,
+a.active {
+  color: #657487;
+  outline: none;
+}
+pr1{
+    font-family:'Roboto', sans-serif;text-align:center;font-size:16px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Roboto Condensed", sans-serif;
+  text-transform: ;
+  font-weight: 700;
+  text-align: center;
+}
+hr{
+    padding-bottom: 15px;
+}
+
+header {
+  text-align: center;
+  background: #657487;
+  color: white;
+}
+header .container {
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+header img {
+  display: block;
+  margin: 0 auto 0px;
+}
+header .intro-text .name {
+  display: block;
+  font-family: 'Oswald', sans-serif;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 2em;
+  letter-spacing: 1.5px
+}
+header .intro-text .traits {
+  font-size: 2em;
+  font-weight: 300;
+}
+@media (min-width: 768px) {
+  header .container {
+    padding-top: 200px;
+    padding-bottom: 100px;
+  }
+  header .intro-text .name {
+    font-size: 4.75em;
+  }
+  header .intro-text .skills {
+    font-size: 1.75em;
+  }
+}
+.navbar-custom {
+  background: #D00000;
+  font-family: 'Roboto Condensed', sans-serif;
+  text-transform: uppercase;
+  font-weight: 700;
+  border: none;
+}
+.navbar-custom a:focus {
+  outline: none;
+}
+.navbar-custom .navbar-brand {
+  color: white;
+}
+.navbar-custom .navbar-brand:hover,
+.navbar-custom .navbar-brand:focus,
+.navbar-custom .navbar-brand:active,
+.navbar-custom .navbar-brand.active {
+  color: white;
+}
+.navbar-custom .navbar-nav {
+  letter-spacing: 1px;
+}
+.navbar-custom .navbar-nav li a {
+  color: white;
+  font-size: 1.2em;
+}
+.navbar-custom .navbar-nav li a:hover {
+  color: #657487;
+  outline: none;
+}
+.navbar-custom .navbar-nav li a:focus{
+  color: white;
+  background: #D3D3D3; 
+}
+
+
+
+
+
+.navbar-custom .navbar-toggle {
+  color: white;
+  text-transform: uppercase;
+  font-size: 14px;
+  border-color: white;
+}
+
+@media (min-width: 768px) {
+  .navbar-custom {
+    padding: 25px 0;
+    -webkit-transition: padding 0.3s;
+    -moz-transition: padding 0.3s;
+    transition: padding 0.3s;
+  }
+  .navbar-custom .navbar-brand {
+    font-size: 2.5em;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    transition: all 0.3s;
+  }
+  .navbar-custom.affix {
+    padding: 10px 0;
+  }
+  .navbar-custom.affix .navbar-brand {
+    font-size: 1.5em;
+  }
+}
+section {
+  padding: 50px 0;
+}
+section h2 {
+  margin: 0;
+  font-size: 3em;
+}
+section.dark {
+  background: #657487;
+  color: white;
+  text-align: center
+}
+
+section.red {
+  background: #d00000;
+  color: white;
+  text-align: center
+}
+
+section.image{
+    background-image: url("assets/ProfileLogo2.png");
+}
+@media (max-width: 767px) {
+  section {
+    padding: 75px 0;
+
+}
+section img {
+  display: block;
+  margin: 0 auto 20px;
+  max-height: 400px;
+}
+section sm{
+    font-size: 14px;
+}
+section t{
+    font-weight: 700;
+}
+
+
+#projects * {
+  z-index: 2;
+}
+@media (min-width: 767px) {
+  #projects .projects-item {
+    margin: 0 0 30px;
+  }
+}
+
+form .row:first-child .floating-label-form-group {
+  border-top: 1px solid #eeeeee;
+}
+footer {
+    background-color: #d00000;
+
+}
+footer h3 {
+  margin-bottom: 30px;
+  text-align: center;
+    
+}
+footer .footer-above {
+  padding-top: 50px;
+  background-color: #657487;
+}
+footer .footer-col {
+  margin-bottom: 50px;
+   
+}
+
+.res-outline {
+  color: #d00000;
+  font-size: 20px;
+  border: solid 2px #d00000;
+  background: transparent;
+  transition: all 0.3s ease-in-out;
+  margin-top: 15px;
+}
+
+.scroll-top {
+  position: fixed;
+  right:2%;
+  bottom: 2%;
+  width: 500px;
+  height: 50px;
+  z-index: 1049;
+}
+
+
+
+
+.tiny {
+    height: 55px;
+    width: 55px;
+}
+>>>>>>> 8fbfccf63187fcea81ae6d5668c0fcbd814568cf
