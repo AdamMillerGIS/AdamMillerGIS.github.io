@@ -1,0 +1,923 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "State": "Alabama",
+        "V_2014": 0.16,
+        "V_2015": 0.2,
+        "V_2016": 0.32,
+        "V_2017": 0.42,
+        "Region": "Southeast"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.8403091,
+          32.7665024
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "State": "Alaska",
+        "V_2014": 0.21,
+        "V_2015": 0.31,
+        "V_2016": 0.55,
+        "V_2017": 0.83,
+        "Region": "West"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -153.7042847,
+          63.1741219
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "State": "Arizona",
+        "V_2014": 0.65,
+        "V_2015": 0.93,
+        "V_2016": 1.66,
+        "V_2017": 2.29,
+        "Region": "Southwest"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.6646957,
+          34.2930794
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "State": "Arkansas",
+        "V_2014": 0.13,
+        "V_2015": 0.15,
+        "V_2016": 0.21,
+        "V_2017": 0.28,
+        "Region": "Southeast"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -92.4388657,
+          34.8999214
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "State": "California",
+        "V_2014": 3.25,
+        "V_2015": 4.68,
+        "V_2016": 6.65,
+        "V_2017": 8.64,
+        "Region": "West"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -119.6175232,
+          37.2551003
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "State": "Colorado",
+        "V_2014": 0.75,
+        "V_2015": 1.09,
+        "V_2016": 1.59,
+        "V_2017": 2.33,
+        "Region": "West"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -105.5478134,
+          38.9985428
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "State": "Connecticut",
+        "V_2014": 0.69,
+        "V_2015": 0.96,
+        "V_2016": 1.31,
+        "V_2017": 1.86,
+        "Region": "Northeast"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.7383041,
+          41.5735016
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "State": "Delaware",
+        "V_2014": 0.41,
+        "V_2015": 0.61,
+        "V_2016": 0.96,
+        "V_2017": 1.33,
+        "Region": "Northeast"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -75.4674683,
+          39.0081253
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "State": "District of Columbia",
+        "V_2014": 0.75,
+        "V_2015": 1.01,
+        "V_2016": 1.52,
+        "V_2017": 1.97,
+        "Region": "Northeast"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.0172653,
+          38.906189
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "State": "Florida",
+        "V_2014": 0.52,
+        "V_2015": 0.73,
+        "V_2016": 1.13,
+        "V_2017": 1.44,
+        "Region": "Southeast"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -82.4722214,
+          28.4925804
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "State": "Georgia",
+        "V_2014": 1.54,
+        "V_2015": 2.2,
+        "V_2016": 2.18,
+        "V_2017": 1.84,
+        "Region": "Southeast"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -83.4445572,
+          32.6483307
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "State": "Hawaii",
+        "V_2014": 2.15,
+        "V_2015": 2.94,
+        "V_2016": 3.8,
+        "V_2017": 5.12,
+        "Region": "West"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -155.5185547,
+          19.5985184
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "State": "Idaho",
+        "V_2014": 0.25,
+        "V_2015": 0.38,
+        "V_2016": 0.63,
+        "V_2017": 0.89,
+        "Region": "West"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -114.6594162,
+          44.3890343
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "State": "Illinois",
+        "V_2014": 0.52,
+        "V_2015": 0.67,
+        "V_2016": 0.92,
+        "V_2017": 1.24,
+        "Region": "Midwest"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.1587677,
+          40.1139374
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "State": "Indiana",
+        "V_2014": 0.26,
+        "V_2015": 0.41,
+        "V_2016": 0.57,
+        "V_2017": 0.73,
+        "Region": "Midwest"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.2817993,
+          39.9198036
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "State": "Iowa",
+        "V_2014": 0.3,
+        "V_2015": 0.38,
+        "V_2016": 0.51,
+        "V_2017": 0.67,
+        "Region": "Midwest"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -93.4999695,
+          42.0746994
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "State": "Kansas",
+        "V_2014": 0.26,
+        "V_2015": 0.35,
+        "V_2016": 0.56,
+        "V_2017": 0.78,
+        "Region": "Midwest"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -98.3801727,
+          38.484726
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "State": "Kentucky",
+        "V_2014": 0.16,
+        "V_2015": 0.21,
+        "V_2016": 0.32,
+        "V_2017": 0.43,
+        "Region": "Southeast"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -85.2876205,
+          37.5272331
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "State": "Louisiana",
+        "V_2014": 0.11,
+        "V_2015": 0.14,
+        "V_2016": 0.24,
+        "V_2017": 0.31,
+        "Region": "Southeast"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -91.8519058,
+          30.9665108
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "State": "Maine",
+        "V_2014": 0.52,
+        "V_2015": 0.66,
+        "V_2016": 0.91,
+        "V_2017": 1.31,
+        "Region": "Northeast"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -69.203949,
+          45.3152809
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "State": "Maryland",
+        "V_2014": 0.84,
+        "V_2015": 0.98,
+        "V_2016": 1.32,
+        "V_2017": 2.03,
+        "Region": "Northeast"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.7012177,
+          38.9525223
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "State": "Massachusetts",
+        "V_2014": 0.68,
+        "V_2015": 0.89,
+        "V_2016": 1.29,
+        "V_2017": 1.97,
+        "Region": "Northeast"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.5661926,
+          42.1561852
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "State": "Michigan",
+        "V_2014": 0.89,
+        "V_2015": 0.99,
+        "V_2016": 1.39,
+        "V_2017": 1.51,
+        "Region": "Midwest"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -85.7351379,
+          44.8626175
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "State": "Minnesota",
+        "V_2014": 0.51,
+        "V_2015": 0.54,
+        "V_2016": 0.78,
+        "V_2017": 1.11,
+        "Region": "Midwest"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -94.1983719,
+          46.3493576
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "State": "Mississippi",
+        "V_2014": 0.07,
+        "V_2015": 0.09,
+        "V_2016": 0.15,
+        "V_2017": 0.2,
+        "Region": "Southeast"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.6562424,
+          32.7218018
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "State": "Missouri",
+        "V_2014": 0.31,
+        "V_2015": 0.39,
+        "V_2016": 0.15,
+        "V_2017": 0.82,
+        "Region": "Midwest"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -92.4778824,
+          38.3679657
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "State": "Montana",
+        "V_2014": 0.35,
+        "V_2015": 0.37,
+        "V_2016": 0.47,
+        "V_2017": 0.61,
+        "Region": "West"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -109.6450806,
+          47.0334816
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "State": "Nebraska",
+        "V_2014": 0.31,
+        "V_2015": 0.37,
+        "V_2016": 0.48,
+        "V_2017": 0.7,
+        "Region": "Midwest"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -99.8111038,
+          41.5272713
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "State": "Nevada",
+        "V_2014": 0.53,
+        "V_2015": 0.8,
+        "V_2016": 1.25,
+        "V_2017": 1.73,
+        "Region": "West"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -116.6554108,
+          39.3564186
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "State": "New Hampshire",
+        "V_2014": 0.57,
+        "V_2015": 0.71,
+        "V_2016": 1.07,
+        "V_2017": 1.61,
+        "Region": "Northeast"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.5775986,
+          43.6855278
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "State": "New Jersey",
+        "V_2014": 0.67,
+        "V_2015": 0.88,
+        "V_2016": 1.25,
+        "V_2017": 1.67,
+        "Region": "Northeast"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.6769104,
+          40.1387787
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "State": "New Mexico",
+        "V_2014": 0.31,
+        "V_2015": 0.4,
+        "V_2016": 0.6,
+        "V_2017": 0.85,
+        "Region": "Southwest"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -106.1084061,
+          34.4213219
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "State": "New York",
+        "V_2014": 0.57,
+        "V_2015": 0.69,
+        "V_2016": 1.01,
+        "V_2017": 1.41,
+        "Region": "Northeast"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -75.6106949,
+          42.9370804
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "State": "North Carolina",
+        "V_2014": 0.34,
+        "V_2015": 0.43,
+        "V_2016": 0.7,
+        "V_2017": 0.94,
+        "Region": "Southeast"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.185379,
+          35.5393562
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "State": "North Dakota",
+        "V_2014": 0.12,
+        "V_2015": 0.15,
+        "V_2016": 0.32,
+        "V_2017": 0.39,
+        "Region": "Midwest"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -100.469429,
+          47.4462967
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "State": "Ohio",
+        "V_2014": 0.33,
+        "V_2015": 0.45,
+        "V_2016": 0.66,
+        "V_2017": 0.83,
+        "Region": "Midwest"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -82.7112198,
+          40.4130516
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "State": "Oklahoma",
+        "V_2014": 0.21,
+        "V_2015": 0.26,
+        "V_2016": 0.4,
+        "V_2017": 0.59,
+        "Region": "Southwest"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -97.5086212,
+          35.5826988
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "State": "Oregon",
+        "V_2014": 1.43,
+        "V_2015": 2.04,
+        "V_2016": 2.91,
+        "V_2017": 3.84,
+        "Region": "West"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -120.5585861,
+          43.9388123
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "State": "Pennsylvania",
+        "V_2014": 0.36,
+        "V_2015": 0.49,
+        "V_2016": 0.71,
+        "V_2017": 0.97,
+        "Region": "Northeast"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.8387527,
+          40.8965111
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "State": "Rhode Island",
+        "V_2014": 0.4,
+        "V_2015": 0.54,
+        "V_2016": 0.77,
+        "V_2017": 1.14,
+        "Region": "Northeast"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.4543152,
+          41.4887123
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "State": "South Carolina",
+        "V_2014": 0.22,
+        "V_2015": 0.28,
+        "V_2016": 0.43,
+        "V_2017": 0.57,
+        "Region": "Southeast"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -80.8937683,
+          33.9038544
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "State": "South Dakota",
+        "V_2014": 0.19,
+        "V_2015": 0.22,
+        "V_2016": 0.36,
+        "V_2017": 0.47,
+        "Region": "Midwest"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -100.2305069,
+          44.4361496
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "State": "Tennessee",
+        "V_2014": 0.42,
+        "V_2015": 0.49,
+        "V_2016": 0.69,
+        "V_2017": 0.77,
+        "Region": "Southeast"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.3430481,
+          35.8430023
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "State": "Texas",
+        "V_2014": 0.37,
+        "V_2015": 0.49,
+        "V_2016": 0.69,
+        "V_2017": 0.91,
+        "Region": "Southwest"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -99.3330307,
+          31.4627552
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "State": "Utah",
+        "V_2014": 0.53,
+        "V_2015": 0.8,
+        "V_2016": 1.32,
+        "V_2017": 1.9,
+        "Region": "West"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.6782379,
+          39.3237381
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "State": "Vermont",
+        "V_2014": 1.34,
+        "V_2015": 1.67,
+        "V_2016": 2.38,
+        "V_2017": 3.73,
+        "Region": "Northeast"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.6626892,
+          44.0752029
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "State": "Virginia",
+        "V_2014": 0.44,
+        "V_2015": 0.6,
+        "V_2016": 0.89,
+        "V_2017": 1.23,
+        "Region": "Southeast"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6980972,
+          37.5127869
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "State": "Washington",
+        "V_2014": 1.74,
+        "V_2015": 2.32,
+        "V_2016": 3.04,
+        "V_2017": 4.06,
+        "Region": "West"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -120.5562668,
+          47.4112968
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "State": "West Virginia",
+        "V_2014": 0.15,
+        "V_2015": 0.18,
+        "V_2016": 0.23,
+        "V_2017": 0.3,
+        "Region": "Southeast"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -80.6136169,
+          38.6424141
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "State": "Wisconsin",
+        "V_2014": 0.42,
+        "V_2015": 0.59,
+        "V_2016": 0.84,
+        "V_2017": 1.07,
+        "Region": "Midwest"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.7367401,
+          44.6417847
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "State": "Wyoming",
+        "V_2014": 0.12,
+        "V_2015": 0.16,
+        "V_2016": 0.29,
+        "V_2017": 0.37,
+        "Region": "West"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -107.5515213,
+          42.9995766
+        ]
+      }
+    }
+  ]
+}
