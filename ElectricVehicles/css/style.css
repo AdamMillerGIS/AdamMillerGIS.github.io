@@ -1,25 +1,43 @@
 /* Stylesheet by Adam Miller, 2019 */
 
 #mapid {
-   height: 400px;
-   width: 70%;
+   height: 450px;
+   width: 100%;
    display: inline-block;
 }
 
-#panel {
-   width: 26%;
-   padding: 20px;
-   display: inline-block;
-   vertical-align: top;
-   text-align: center;
-   line-height: 42px;
-}
+
 
 .leaflet-popup-content p {
     margin: 0.2em 0;
 }
 
+.legend-control-container {
+    width: 180px;
+    height: 100px;
+    background-color: rgba(255,255,255,0.8);
+    padding: 10px;
+    line-height: 45px;
+    text-align: center;
+    border: solid gray 1px;
+}
+.sequence-control-container {
+    width: 350px;
+    height: 40px;
+    background-color: rgba(255,255,255,0.8);
+    padding: 10px;
+    line-height: 45px;
+    text-align: center;
+    border: solid gray 1px;
+}
 
+.range-slider {
+    width: 200px;
+}
+
+.temporal-legend{
+    font-size: 8%;
+}
 
 #forward {
     float: right;
@@ -28,3 +46,44 @@
 #reverse {
     float: left;
 }
+
+.menu-ui {
+  background:#fff;
+  position:absolute;
+  top:10px;right:10px;
+  z-index:1;
+  border-radius:3px;
+  width:120px;
+  border:1px solid rgba(0,0,0,0.4);
+  }
+
+.menu-ui a {
+    font-size:13px;
+    color:#404040;
+    display:block;
+    margin:0;padding:0;
+    padding:10px;
+    text-decoration:none;
+    border-bottom:1px solid rgba(0,0,0,0.25);
+    text-align:center;
+    }
+
+.menu-ui a:first-child {
+      border-radius:3px 3px 0 0;
+      }
+
+.menu-ui a:last-child {
+      border:none;
+      border-radius:0 0 3px 3px;
+      }
+
+.menu-ui a:hover {
+      background:#f8f8f8;
+      color:#404040;
+      }
+
+.menu-ui a.active,
+.menu-ui a.active:hover {
+      background:#3887BE;
+      color:#FFF;
+      }
