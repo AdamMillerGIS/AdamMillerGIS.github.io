@@ -1,5 +1,5 @@
 /* Map of GeoJSON data from MegaCities.geojson */
-
+//l.mapbox.accessToken = 'pk.eyJ1IjoiYXJtaWxsZXIzNCIsImEiOiJjajZ6cW4yam8wM3c2Mnhxbmh6Mnc1OGszIn0.5rdbrjGFmUv2Pw94FQTCtQ'
 //function to instantiate the Leaflet map
 function createMap(){
     //create the map
@@ -7,7 +7,8 @@ function createMap(){
         center: [40, -98],
         zoom: 4
     });
-http://b.tile.stamen.com/toner/12/654/1583@2x.png
+
+
     //add Stamen Toner base tilelayer
     L.tileLayer('http://tile.stamen.com/toner/{z}/{x}/{y}.png', {
         attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://www.openstreetmap.org/copyright">ODbL</a>'
@@ -206,6 +207,7 @@ function pointToLayer(feature, latlng, attributes){
        }
    });
 
+   filter(layer)
    //return the circle marker to the L.geoJson pointToLayer option
    return layer;
 };
@@ -340,6 +342,25 @@ function updatePropSymbols(map, attribute){
 
 };
 
+function filter(layer){
+  console.log()
+  $('.menu-ui a').on('click', function() {
+      // For each filter link, get the 'data-filter' attribute value.
+      var filter = $(this).data('filter');
+      $(this).addClass('active').siblings().removeClass('active');
+      layer.setFilter(function(f) {
+          // If the data-filter attribute is set to "all", return
+          // all (true). Otherwise, filter on markers that have
+          // a value set to true based on the filter name.
+          return (filter === 'all') ? true : f.properties[filter] === true;
+      });
+      return false;
+  });
+
+};
+//function layerControl(map,layer1,layer2){
+
+//}
 //Above Example 3.8...Step 3: build an attributes array from the data
 function processData(data){
     //empty array to hold attributes
@@ -375,24 +396,13 @@ function getData(map){
             createPropSymbols(response, map, attributes);
             createSequenceControls(map,attributes);
             createLegend(map,attributes);
-            console.log(response)
         }
     });
+
+
 };
 
 
 
-$('.menu-ui a').on('click', function() {
-    // For each filter link, get the 'data-filter' attribute value.
-    var filter = $(this).data('filter');
-    $(this).addClass('active').siblings().removeClass('active');
-    attributes.setFilter(function(f) {
-        // If the data-filter attribute is set to "all", return
-        // all (true). Otherwise, filter on markers that have
-        // a value set to true based on the filter name.
-        return (filter === 'all') ? true : f.properties[filter] === true;
-    });
-    return false;
-});
 
 $(document).ready(createMap);

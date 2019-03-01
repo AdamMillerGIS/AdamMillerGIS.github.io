@@ -1,9 +1,8 @@
 /* Stylesheet by Adam Miller, 2019 */
 
-#mapid {
-   height: 450px;
+html, body, #mapid {
+   height: 100%;
    width: 100%;
-   display: inline-block;
 }
 
 
