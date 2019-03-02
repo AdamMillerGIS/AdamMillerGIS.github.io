@@ -40,7 +40,7 @@ function createLegend(map, attributes){
             $(container).append('<div id="temporal-legend">')
 
             //Step 1: start attribute legend svg string
-            var svg = '<svg id="attribute-legend" width="160px" height="60px">';
+            var svg = '<svg id="attribute-legend" width="160px" height="100px">';
 
             //array of circle names to base loop on
             var circles = {
@@ -132,7 +132,7 @@ function updateLegend(map, attribute){
       });
 
       //Step 4: add legend text
-      $('#'+key+'-text').text(circleValues[key] + " Vehicles /1000");
+      $('#'+key+'-text').text(circleValues[key].toFixed(1) + " Vehicles");
 
     };
 };
@@ -145,7 +145,6 @@ function calcPropRadius(attValue) {
     var area = attValue * scaleFactor;
     //radius calculated based on area
     var radius = Math.sqrt(area/Math.PI);
-
     return radius;
 };
 
@@ -174,6 +173,8 @@ function pointToLayer(feature, latlng, attributes){
 
    //create circle marker layer
    var layer = L.circleMarker(latlng, options);
+
+
 
    //build popup content string
    var popupContent = "<p><b>State:</b> " + feature.properties.State + "</p>";
@@ -406,9 +407,9 @@ function getData(map){
 
 function getColor(d) {
     return d > 25 ? '#800026' :
-           d > 15  ? '#BD0026' :
-           d > 5  ? '#E31A1C' :
-           d > 0  ? '#FC4E2A' :
+           d > 15  ? '#FD8D3C' :
+           d > 5  ? '#FEB24C'  :
+           d > 0  ? '#FED976' :
                     '#FFEDA0';
 };
 
@@ -432,11 +433,14 @@ function styleStates(feature){
 function loadStates(map){
   $.getJSON("data/states.geojson")
   	 .done(function(data) {
-        console.log(data);
-        L.geoJson(data, {style: styleStates}).addTo(map);
+      var states =  L.geoJson(data, {style: styleStates});
+      var overlays = {
+        "Electric Vehicle Incentives": states};
+      var baseLayers;
+      L.control.layers(baseLayers,overlays).addTo(map);
+
+
       })
-
-
 };
 
 console.log(statesLayer)

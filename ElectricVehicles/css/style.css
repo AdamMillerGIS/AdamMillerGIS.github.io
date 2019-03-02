@@ -12,12 +12,13 @@ html, body, #mapid {
 }
 
 .legend-control-container {
-    width: 180px;
-    height: 110px;
+    width: 160px;
+    height: 120px;
     background-color: rgba(255,255,255,0.8);
-    padding: 10px;
+    padding: 2px;
     line-height: 45px;
     text-align: center;
+    font-size: 70%;
     border: solid gray 1px;
 
 }
@@ -35,9 +36,10 @@ html, body, #mapid {
     width: 200px;
 }
 
-.temporal-legend{
-    font-size: 8%;
-    background: black;
+#temporal-legend{
+    font-size: 100%;
+    font-weight: boldr;
+
 }
 
 #forward {
