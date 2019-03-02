@@ -1,6 +1,8 @@
 /* Map of GeoJSON data from MegaCities.geojson */
 //l.mapbox.accessToken = 'pk.eyJ1IjoiYXJtaWxsZXIzNCIsImEiOiJjajZ6cW4yam8wM3c2Mnhxbmh6Mnc1OGszIn0.5rdbrjGFmUv2Pw94FQTCtQ'
 //function to instantiate the Leaflet map
+var statesLayer;
+
 function createMap(){
     //create the map
     var map = L.map('mapid', {
@@ -19,6 +21,7 @@ function createMap(){
     // }).addTo(map);
 
     //call getData function
+    loadStates(map);
     getData(map);
 };
 
@@ -399,10 +402,43 @@ function getData(map){
         }
     });
 
+};
+
+function getColor(d) {
+    return d > 25 ? '#800026' :
+           d > 15  ? '#BD0026' :
+           d > 5  ? '#E31A1C' :
+           d > 0  ? '#FC4E2A' :
+                    '#FFEDA0';
+};
+
+function styleStates(feature){
+  return{
+      fillColor: getColor(feature.properties.INCENTIVES),
+      weight: 1,
+      opacity: 1,
+      color: 'black',
+      dashArray: '3',
+      fillOpacity: 0.5
+  };
+};
+
+// function controlLayers(map,overlay){
+//   L.control.layers(overlay).addTo(map);
+// };
+
+
+
+function loadStates(map){
+  $.getJSON("data/states.geojson")
+  	 .done(function(data) {
+        console.log(data);
+        L.geoJson(data, {style: styleStates}).addTo(map);
+      })
+
 
 };
 
-
-
+console.log(statesLayer)
 
 $(document).ready(createMap);
