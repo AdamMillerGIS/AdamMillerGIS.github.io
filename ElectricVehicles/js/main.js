@@ -222,6 +222,16 @@ function createTitle(map){
   logo.addTo(map);
 }
 
+//function to add the title to topright corner of the page
+function createText(map){
+  var logo = L.control({position: 'bottomleft'});
+  logo.onAdd = function(map){
+      var div = L.DomUtil.create('div', 'text-box');
+      div.innerHTML= '<i> Data courtesy of the <a href="https://afdc.energy.gov/laws/matrix?sort_by=tech">Alternative Fuels Data Center</a> </i>';
+      return div;
+  }
+  logo.addTo(map);
+}
 //Create new sequence controls
 function createSequenceControls(map,attributes){
 
@@ -377,6 +387,7 @@ function getData(map){
             createSequenceControls(map,attributes);
             createLegend(map,attributes);
             createTitle(map);
+            createText(map);
         }
     });
 
