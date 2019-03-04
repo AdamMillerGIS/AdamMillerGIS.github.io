@@ -1,8 +1,7 @@
 /* Map of GeoJSON data from MegaCities.geojson */
-//l.mapbox.accessToken = 'pk.eyJ1IjoiYXJtaWxsZXIzNCIsImEiOiJjajZ6cW4yam8wM3c2Mnhxbmh6Mnc1OGszIn0.5rdbrjGFmUv2Pw94FQTCtQ'
-//function to instantiate the Leaflet map
-var statesLayer;
 
+
+//function to create and add data to the map
 function createMap(){
     //create the map
     var map = L.map('mapid', {
@@ -16,16 +15,13 @@ function createMap(){
         attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://www.openstreetmap.org/copyright">ODbL</a>'
     }).addTo(map);
 
-    // L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    //     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>'
-    // }).addTo(map);
 
-    //call getData function
+    //load symbol marker data and the chloropleth state layer to the map
     loadStates(map);
     getData(map);
 };
 
-//function to create the legend
+//function to create the symbol markerlegend
 function createLegend(map, attributes){
     var LegendControl = L.Control.extend({
         options: {
@@ -39,7 +35,7 @@ function createLegend(map, attributes){
             //add temporal legend div to container
             $(container).append('<div id="temporal-legend">')
 
-            //Step 1: start attribute legend svg string
+            //create attribute legend svg string
             var svg = '<svg id="attribute-legend" width="160px" height="100px">';
 
             //array of circle names to base loop on
@@ -49,7 +45,7 @@ function createLegend(map, attributes){
                 min: 60
             };
 
-            //Step 2: loop to add each circle and text to svg string
+            //loop to add each circle and text to svg string
             for (var circle in circles){
                 //circle string
 
@@ -68,9 +64,9 @@ function createLegend(map, attributes){
             return container;
         }
     });
-
+    //add the legend to the map
     map.addControl(new LegendControl());
-
+    //run the updateLegend script to update the size of the circles and text
     updateLegend(map, attributes[0]);
 };
 
@@ -125,13 +121,13 @@ function updateLegend(map, attribute){
       //get the radius
       var radius = calcPropRadius(circleValues[key]);
 
-      //Step 3: assign the cy and r attributes
+      //assign the cy and r attributes
       $('#'+key).attr({
           cy: 59 - radius,
           r: radius
       });
 
-      //Step 4: add legend text
+      //add legend text
       $('#'+key+'-text').text(circleValues[key].toFixed(1) + " Vehicles");
 
     };
@@ -190,7 +186,7 @@ function pointToLayer(feature, latlng, attributes){
 
    //event listeners to open popup on hover
     layer.on({
-        mouseover: function(){
+        click: function(){
             this.openPopup();
         },
         mouseout: function(){
@@ -198,37 +194,35 @@ function pointToLayer(feature, latlng, attributes){
         }
     });
 
-    ///event listeners to open popup on hover and fill panel on click...Example 2.5 line 4
-   layer.on({
-       mouseover: function(){
-           this.openPopup();
-       },
-       mouseout: function(){
-           this.closePopup();
-       },
-       click: function(){
-           $("#panel").html(popupContent);
-       }
-   });
-
-   filter(layer)
    //return the circle marker to the L.geoJson pointToLayer option
    return layer;
 };
 
 
 
-//Step 3: Add circle markers for point features to the map
+// Add circle markers for point features to the map
 function createPropSymbols(data, map, attributes){
   //create a Leaflet GeoJSON layer and add it to the map
-  L.geoJson(data, {
+   L.geoJson(data, {
       pointToLayer: function(feature, latlng){
           return pointToLayer(feature, latlng, attributes);
       }
   }).addTo(map);
+
 };
 
-//Step 1: Create new sequence controls
+//function to add the title to topright corner of the page
+function createTitle(map){
+  var logo = L.control({position: 'topright'});
+  logo.onAdd = function(map){
+      var div = L.DomUtil.create('div', 'title-img');
+      div.innerHTML= "<img src='img/title.png'/>";
+      return div;
+  }
+  logo.addTo(map);
+}
+
+//Create new sequence controls
 function createSequenceControls(map,attributes){
 
     var SequenceControl = L.Control.extend({
@@ -272,35 +266,35 @@ function createSequenceControls(map,attributes){
     });
 
 
-    //Below Example 3.5...replace button content with images
+    //replace button content with images
     $('#reverse').html('<img src="img/rewind.svg">');
     $('#forward').html('<img src="img/forward.svg">');
 
-    //Step 5: click listener for buttons
+    //click listener for buttons
     $('.skip').click(function(){
            //get the old index value
            var index = $('.range-slider').val();
 
-           //Step 6: increment or decrement depending on button clicked
+           //increment or decrement depending on button clicked
            if ($(this).attr('id') == 'forward'){
                index++;
-               //Step 7: if past the last attribute, wrap around to first attribute
+               //if past the last attribute, wrap around to first attribute
                index = index > 3 ? 0 : index;
            } else if ($(this).attr('id') == 'reverse'){
                index--;
-               //Step 7: if past the first attribute, wrap around to last attribute
+               //if past the first attribute, wrap around to last attribute
                index = index < 0 ? 3 : index;
            };
 
-           //Step 8: update slider
+           //update slider
            $('.range-slider').val(index);
 
            //Called in both skip button and slider event listener handlers
-            //Step 9: pass new attribute to update symbols
+            //pass new attribute to update symbols
             updatePropSymbols(map, attributes[index]);
        });
 
-//Step 5: input listener for slider
+//input listener for slider
     $('.range-slider').on('input', function(){
         //Step 6: get the new index value
         var index = $(this).val();
@@ -316,10 +310,10 @@ function createSequenceControls(map,attributes){
 
 
 
-//Step 10: Resize proportional symbols according to new attribute values
+//Resize proportional symbols according to new attribute values
 function updatePropSymbols(map, attribute){
     map.eachLayer(function(layer){
-      //Example 3.16 line 4
+
        if (layer.feature && layer.feature.properties[attribute]){
            //access feature properties
            var props = layer.feature.properties;
@@ -346,26 +340,8 @@ function updatePropSymbols(map, attribute){
 
 };
 
-function filter(layer){
-  console.log()
-  $('.menu-ui a').on('click', function() {
-      // For each filter link, get the 'data-filter' attribute value.
-      var filter = $(this).data('filter');
-      $(this).addClass('active').siblings().removeClass('active');
-      layer.setFilter(function(f) {
-          // If the data-filter attribute is set to "all", return
-          // all (true). Otherwise, filter on markers that have
-          // a value set to true based on the filter name.
-          return (filter === 'all') ? true : f.properties[filter] === true;
-      });
-      return false;
-  });
 
-};
-//function layerControl(map,layer1,layer2){
-
-//}
-//Above Example 3.8...Step 3: build an attributes array from the data
+// build an attributes array from the data
 function processData(data){
     //empty array to hold attributes
     var attributes = [];
@@ -387,7 +363,7 @@ function processData(data){
     return attributes;
 };
 
-//Step 2: Import GeoJSON data
+//Import GeoJSON data
 function getData(map){
     //load the data
     $.ajax("data/ElectricVehicles.geojson", {
@@ -400,19 +376,23 @@ function getData(map){
             createPropSymbols(response, map, attributes);
             createSequenceControls(map,attributes);
             createLegend(map,attributes);
+            createTitle(map);
         }
     });
 
 };
 
+
+//function to assign color to the chloropleth map categories
 function getColor(d) {
-    return d > 25 ? '#800026' :
-           d > 15  ? '#FD8D3C' :
-           d > 5  ? '#FEB24C'  :
-           d > 0  ? '#FED976' :
-                    '#FFEDA0';
+    return d > 25 ? '#2171b5' :
+           d > 15  ? '#6baed6' :
+           d > 5  ? '#bdd7e7'  :
+           d > 0  ? '#eff3ff' :
+                    '#eff3ff';
 };
 
+//function to set the style for the states chloropleth layer
 function styleStates(feature){
   return{
       fillColor: getColor(feature.properties.INCENTIVES),
@@ -420,29 +400,52 @@ function styleStates(feature){
       opacity: 1,
       color: 'black',
       dashArray: '3',
-      fillOpacity: 0.5
+      fillOpacity: 0.4
   };
 };
 
-// function controlLayers(map,overlay){
-//   L.control.layers(overlay).addTo(map);
-// };
 
 
 
+//function to load the states layer
 function loadStates(map){
+//load the geosjon and assign it to the states variable
   $.getJSON("data/states.geojson")
   	 .done(function(data) {
       var states =  L.geoJson(data, {style: styleStates});
+      //create an overlays & baselayers variable
       var overlays = {
         "Electric Vehicle Incentives": states};
       var baseLayers;
+      //create layer control in the top right of the page
       L.control.layers(baseLayers,overlays).addTo(map);
 
+    //create a chloropleth legend
+  var legend = L.control({position: 'bottomright'});
 
-      })
+  legend.onAdd = function (map) {
+
+  var div = L.DomUtil.create('div', 'info legend'),
+        states = [0, 5, 15, 25],
+        labels = [];
+
+  //create a heading for the legend
+  div.innerHTML = "<h4> Incentives for <br> Electric Cars </h4>"
+    // loop through the incentives intervals and generate a label with a colored square for each interval
+    for (var i = 0; i < states.length; i++) {
+        div.innerHTML +=
+
+            '<i style="background:' + getColor(states[i] + 1) + '"></i> ' +
+            states[i] + (states[i + 1] ? '&ndash;' + states[i + 1] + '<br>'+ '<br>' : '+');
+    }
+
+    return div;
+  };
+
+  legend.addTo(map);
+  })
 };
 
-console.log(statesLayer)
 
+//create the map
 $(document).ready(createMap);

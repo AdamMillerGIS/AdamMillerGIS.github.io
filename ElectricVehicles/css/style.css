@@ -5,8 +5,19 @@ html, body, #mapid {
    width: 100%;
 }
 
+.titleimg{
+  width: 400px;
+}
 
-
+.title-container {
+  width: 400px;
+  height: 50px;
+  background-color: rgba(255,255,255,0.8);
+  padding: 10px;
+  line-height: 45px;
+  text-align: center;
+  border: solid gray 1px;
+}
 .leaflet-popup-content p {
     margin: 0.2em 0;
 }
@@ -18,8 +29,10 @@ html, body, #mapid {
     padding: 2px;
     line-height: 45px;
     text-align: center;
-    font-size: 70%;
+    font-size: 80%;
     border: solid gray 1px;
+    border-radius: 5px;
+    font: 14px/16px Arial, Helvetica, sans-serif;
 
 }
 .sequence-control-container {
@@ -30,6 +43,7 @@ html, body, #mapid {
     line-height: 45px;
     text-align: center;
     border: solid gray 1px;
+    border-radius: 5px;
 }
 
 .range-slider {
@@ -90,3 +104,34 @@ html, body, #mapid {
       background:#3887BE;
       color:#FFF;
       }
+
+.legend {
+    line-height: 18px;
+    color: black;
+    }
+
+.legend i {
+    width: 18px;
+    height: 18px;
+    float: left;
+    margin-right: 8px;
+    opacity: 0.5;
+    }
+
+.info {
+    padding: 6px 8px;
+    font: 14px/16px Arial, Helvetica, sans-serif;
+    background: white;
+    background: rgba(255,255,255,0.8);
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    border-radius: 5px;
+    text-align: center;
+    }
+.info h4 {
+    font: 14px/16px Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    margin: 0 0 5px;
+    color: black;
+    font-size: 90%;
+    text-align: center;
+    }
