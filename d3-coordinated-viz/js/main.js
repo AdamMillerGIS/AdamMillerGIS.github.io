@@ -16,11 +16,11 @@ function setMap(){
       .attr("height", height);
 
     //create Albers equal area conic projection centered on France
-    var projection = d3.geo.albers()
-      .center([0.00, 38.15])
-      .rotate([88.27, 0.00, 0])
-      .parallels([29.5, 45.5])
-      .scale(553.54)
+    var projection = d3.geo.conicEqualArea()
+      .center([-10, 38.15])
+      .rotate([84, 0, 0])
+      .parallels([43, 62])
+      .scale(700)
       .translate(width / 2, height / 2);
 
 
@@ -32,14 +32,14 @@ function setMap(){
     //use queue to parallelize asynchronous data loading
     d3_queue.queue()
         .defer(d3.csv, "data/NSAAChamps.csv") //load attributes from csv
-        .defer(d3.json, "data/states.topojson")//load background spatial data
-        .defer(d3.json, "data/counties.topojson") //load choropleth spatial data
+        .defer(d3.json, "data/States.topojson")//load background spatial data
+        .defer(d3.json, "data/Counties.topojson") //load choropleth spatial data
         .await(callback);
 
-    function callback(error, csvData,states, counties){
+    function callback(error, csvData,statesData, countiesData){
         //translate europe TopoJSON
-        var usaStates = topojson.feature(states, states.objects.states),
-            nebraskaCounties = topojson.feature(counties, counties.objects.counties).features;
+        var usaStates = topojson.feature(statesData, statesData.objects.states),
+            nebraskaCounties = topojson.feature(countiesData, countiesData.objects.counties).features;
 
         var states = map.append("path")
             .datum(usaStates)
@@ -48,12 +48,12 @@ function setMap(){
 
 
       //  add France regions to map
-        var regions = map.selectAll(".regions")
+        var regions = map.selectAll(".counties")
             .data(nebraskaCounties)
             .enter()
             .append("path")
             .attr("class", function(d){
-                return "regions " + d.properties.FIPSCode
+                return "counties " + d.properties.FIPSCode
             })
             .attr("d", path);
 
