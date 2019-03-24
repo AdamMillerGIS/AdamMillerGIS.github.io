@@ -48,7 +48,7 @@ function setMap(){
 
 
       //  add France regions to map
-        var regions = map.selectAll(".counties")
+        var counties = map.selectAll(".counties")
             .data(nebraskaCounties)
             .enter()
             .append("path")
