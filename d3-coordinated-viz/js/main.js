@@ -1,5 +1,10 @@
 //begin script when window loads
-window.onload = setMap();
+window.onload = initialize();
+
+function initialize(){
+  setMap();
+};
+
 
 //set up choropleth map
 function setMap(){
@@ -17,7 +22,7 @@ function setMap(){
 
     //create Albers equal area conic projection centered on France
     var projection = d3.geo.albers()
-      .center([-10, 38.15])
+      .center([-8, 38.1])
       .rotate([84, 0])
       .parallels([43, 62])
       .scale(700)
@@ -53,10 +58,9 @@ function setMap(){
         var countybound = map.selectAll(".counties")
             .data(nebraskaCounties)
             .enter()
-            .append("path", convert)
+            .append("path")
             .attr("class", function(d){
-                return "counties " + d.properties.FIPSCode
-            })
+                return "counties " + d.properties.FIPSCode})
             .attr("d", path);
 
         function convert(d) {
