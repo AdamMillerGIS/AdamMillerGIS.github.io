@@ -16,9 +16,9 @@ function setMap(){
       .attr("height", height);
 
     //create Albers equal area conic projection centered on France
-    var projection = d3.geo.conicEqualArea()
+    var projection = d3.geo.albers()
       .center([-10, 38.15])
-      .rotate([84, 0, 0])
+      .rotate([84, 0])
       .parallels([43, 62])
       .scale(700)
       .translate(width / 2, height / 2);
@@ -36,28 +36,35 @@ function setMap(){
         .defer(d3.json, "data/Counties.topojson") //load choropleth spatial data
         .await(callback);
 
+
+
     function callback(error, csvData,statesData, countiesData){
         //translate europe TopoJSON
         var usaStates = topojson.feature(statesData, statesData.objects.states),
             nebraskaCounties = topojson.feature(countiesData, countiesData.objects.counties).features;
 
-        var states = map.append("path")
+        var statesbound = map.append("path", convert)
             .datum(usaStates)
             .attr("class", "states")
             .attr("d", path);
 
 
       //  add France regions to map
-        var counties = map.selectAll(".counties")
+        var countybound = map.selectAll(".counties")
             .data(nebraskaCounties)
             .enter()
-            .append("path")
+            .append("path", convert)
             .attr("class", function(d){
                 return "counties " + d.properties.FIPSCode
             })
             .attr("d", path);
 
-
+        function convert(d) {
+              return {
+                path: new Path(d.path),
+                value: +d.value
+              }
+            }
 
 
         //examine the results
