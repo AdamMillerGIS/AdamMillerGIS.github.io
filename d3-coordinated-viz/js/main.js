@@ -48,7 +48,7 @@ function setMap(){
         var usaStates = topojson.feature(statesData, statesData.objects.states),
             nebraskaCounties = topojson.feature(countiesData, countiesData.objects.counties).features;
 
-        var statesbound = map.append("path", convert)
+        var statesbound = map.append("path")
             .datum(usaStates)
             .attr("class", "states")
             .attr("d", path);
