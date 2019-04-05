@@ -35,7 +35,7 @@ function setMap(){
 
 
     //use queue to parallelize asynchronous data loading
-    d3_queue.queue()
+    queue()
         .defer(d3.csv, "data/NSAAChamps.csv") //load attributes from csv
         .defer(d3.json, "data/States.topojson")//load background spatial data
         .defer(d3.json, "data/Counties.topojson") //load choropleth spatial data
@@ -44,6 +44,11 @@ function setMap(){
 
 
     function callback(error, csvData,statesData, countiesData){
+
+        console.log(error);
+        console.log(csvData);
+        console.log(statesData);
+        console.log(countiesData)
         //translate europe TopoJSON
         var usaStates = topojson.feature(statesData, statesData.objects.states),
             nebraskaCounties = topojson.feature(countiesData, countiesData.objects.counties).features;
@@ -63,12 +68,8 @@ function setMap(){
                 return "counties " + d.properties.FIPSCode})
             .attr("d", path);
 
-        function convert(d) {
-              return {
-                path: new Path(d.path),
-                value: +d.value
-              }
-            }
+
+
 
 
         //examine the results

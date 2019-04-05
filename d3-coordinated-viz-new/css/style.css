@@ -1,0 +1,183 @@
+.map {
+    border: medium solid #BDA635;
+    margin: 10px 0 0 20px;
+}
+
+.states {
+    fill: #fff;
+    stroke: #CCC;
+    stroke-width: 2px;
+}
+
+
+
+.chart {
+    float: right;
+    margin: 7px 20px 0 0;
+}
+
+.chartTitle {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.5em;
+    font-weight: extra-bold;
+}
+
+.chartBackground {
+    fill: #fff;
+}
+
+.chartFrame {
+    fill: none;
+    stroke: #BDA635;
+    stroke-width: 3px;
+    shape-rendering: crispEdges;
+}
+
+.legend{
+
+  top: 30px;
+  left: 550px;
+  z-index: 10;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1em;
+  font-weight: bold;
+  padding: 12px;
+  border: 3px solid #BDA635;
+  fill: black;
+  shape-rendering: crispEdges;
+  background-color: white;
+}
+
+
+
+
+
+.title {
+    margin: 7px 20px 0 0;
+
+}
+
+.titleName {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1em;
+    font-weight: bold;
+    fill: white;
+    text-align: right
+
+}
+
+.titleBackground {
+    fill: rgba(255,255,255,.2);
+}
+
+.head {
+    margin: 7px 20px 0 0;
+}
+
+.headName {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2em;
+    font-weight: bold;
+    fill: white;
+
+
+}
+
+.headName text{
+  text-align: center;
+}
+
+.headBackground {
+    fill: rgba(255,255,255,.2);
+}
+
+
+.axis path,
+.axis line {
+    fill: none;
+    stroke: #999;
+    stroke-width: 1px;
+    shape-rendering: crispEdges;
+}
+
+.axis text {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.8em;
+    fill: #999;
+}
+
+.counties {
+    stroke: #000;
+    stroke-width: 0.5px;
+    stroke-linecap: round;
+}
+
+.numbers {
+    fill: white;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.dropdown {
+    position: absolute;
+    top: 90px;
+    left: 40px;
+    z-index: 10;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1em;
+    font-weight: bold;
+    padding: 2px;
+    border: 1px solid #999;
+    box-shadow: 2px 2px 4px #999;
+}
+
+body{
+  background-color: #1A488B;
+}
+
+option {
+    font-weight: normal;
+}
+
+.infolabel {
+    position: absolute;
+    height: 50px;
+    min-width: 100px;
+    color: #fff;
+    background-color: #DC1720;
+    border: solid thin #fff;
+    padding: 5px 10px;
+    top: -75px;
+}
+
+.infolabel h1 {
+    margin: 0 20px 0 0;
+    padding: 0;
+    display: inline-block;
+    line-height: 1em;
+    font-family: 'Montserrat', sans-serif;
+}
+
+
+
+li.key {
+    border-top-width: 15px;
+    border-top-style: solid;
+    font-size: .75em;
+    width: 10%;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.labelname{
+  font-family: 'Montserrat', sans-serif;
+}
+
+h1{
+  font-family: 'Montserrat', sans-serif;
+
+}
+
+b{
+  font-family: 'Montserrat', sans-serif;
+
+}
