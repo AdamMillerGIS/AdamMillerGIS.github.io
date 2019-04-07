@@ -4,6 +4,8 @@
     //pseudo-global variables
     var attrArray = ["Girls Basketball", "Boys Basketball", "Football", "Volleyball", "Wrestling","Total"]; //list of attributes
     var expressed = attrArray[0]; //initial attribute
+
+    //create the colors for the legend
     var legendColors = ["#fee5d9",
                 "#fcae91",
                 "#fb6a4a",
@@ -23,15 +25,16 @@
     //create a scale to size bars proportionally to frame and for axis
     var yScale = d3.scale.linear()
         .range([463, 0])
-        .domain([0, 4]);
+        .domain([-.1, 4]);
 
 
 
     //begin script when window loads
     window.onload = setMap();
 
-    //Example 1.3 line 4...set up choropleth map
+    //set up choropleth map
     function setMap(){
+        //create the heading for the page
         createHead();
 
 
@@ -48,7 +51,7 @@
             .attr("width", width)
             .attr("height", height);
 
-        //Example 2.1 line 15...create Albers equal area conic projection centered on France
+        //create Albers equal area conic projection centered on Nebraska
         var projection = d3.geo.albers()
             .center([-8, 41])
             .rotate([92, 0])
@@ -56,36 +59,31 @@
             .scale(3400)
             .translate([width / 2, height / 2]);
 
+        //create path variable based on projection
         var path = d3.geo.path()
             .projection(projection);
 
-        //Example 1.4 line 3...use d3.queue to parallelize asynchronous data loading
+        //use d3.queue to parallelize asynchronous data loading
         d3.queue()
             .defer(d3.csv, "data/unitsData.csv") //load attributes from csv
             .defer(d3.json, "data/States.topojson") //load background spatial data
             .defer(d3.json, "data/Counties.topojson") //load choropleth spatial data
             .await(callback);
 
-        // function callback(error, csvData, europe, france){
-        //     console.log(error);
-        //     console.log(csvData);
-        //     console.log(europe);
-        //     console.log(france);
-        // };
 
 
-     //Example 1.5 line 1
+
+     //Callback function to load data
     function callback(error, csvData, states, counties){
 
-            // //place graticule on the map
-            // setGraticule(map, path);
 
 
-            //translate europe and France TopoJSONs
+
+            //translate State and County TopoJSONs
             var stateBoundaries = topojson.feature(states, states.objects.states),
                 countyBoundaries = topojson.feature(counties, counties.objects.counties).features;
 
-            //add Europe countries to map
+            //add States countries to map
             var states = map.append("path")
                 .datum(stateBoundaries)
                 .attr("class", "states")
@@ -103,11 +101,14 @@
         //add coordinated visualization to the map
         setChart(csvData, colorScale);
 
+
+        //Create the interactive Title
         createTitle(expressed);
 
+        //call the fuction to create the dropdown
         createDropdown(csvData);
 
-
+        //call the function to create the chloropleth legend
         createLegend(colorScale);
 
         };
@@ -118,20 +119,20 @@
 
 
 
-
+    //create the join fuction to join the csv & toposjson
     function joinData(countyBoundaries, csvData){
         //variables for data join
         var attrArray = ["Girls Basketball", "Boys Basketball", "Football", "Volleyball", "Wrestling","Total"];
 
-        //loop through csv to assign each set of csv attribute values to geojson region
+        //loop through csv to assign each set of csv attribute values to geojson county
         for (var i=0; i<csvData.length; i++){
-            var csvCounty = csvData[i]; //the current region
+            var csvCounty = csvData[i]; //the current county
             var csvKey = csvCounty.FIPSCode; //the CSV primary key
 
-            //loop through geojson regions to find correct region
+            //loop through geojson regions to find correct county
             for (var a=0; a<countyBoundaries.length; a++){
 
-                var geojsonProps = countyBoundaries[a].properties; //the current region geojson properties
+                var geojsonProps = countyBoundaries[a].properties; //the current county geojson properties
                 var geojsonKey = geojsonProps.FIPSCode; //the geojson primary key
 
                 //where primary keys match, transfer csv data to geojson properties object
@@ -149,10 +150,10 @@
         return countyBoundaries;
     };
 
-    //Example 1.3 line 38
+    //function to create the enumeration units
     function setEnumerationUnits(countyBoundaries, map, path, colorScale){
 
-         //in setEnumerationUnits()...add France regions to map
+         //in setEnumerationUnits()...add Nebraska Counties to map
         var counties = map.selectAll(".counties")
             .data(countyBoundaries)
             .enter()
@@ -173,21 +174,22 @@
             })
             .on("mousemove", moveLabel);
 
-        //below Example 2.2 line 16...add style descriptor to each path
+        //add style descriptor to each path
         var desc = counties.append("desc")
             .text('{"stroke": "#000", "stroke-width": "0.5px"}');
 
 
     };
-
+    //function to create the interactive legend
     function createLegend(colorScale){
-      console.log(legendColors)
+
+      //create the array to hold the legend text
       var legendText = []
 
+      //loop through the chloropleth array to find the max and min values of each color break
       for (var i=0; i<legendColors.length; i++){
         var val = colorScale.invertExtent(legendColors[i]);
-        //legendText.push(val[0] + " - " + val[1])
-        //legendText.push(val[1])
+
         if (val[0] == undefined){
           val[0] = 0
         };
@@ -200,21 +202,18 @@
       };
       legendText[4] = legendText[4].replace(' - ',' ')
 
-
+      //create the legend svg
       var legend = d3.select("body")
           .append("svg")
           // .attr("width", 200)
           // .attr("height", 30)
           .attr("class", "legend")
 
-      // var legendBackground = legend.append("rect")
-      //     .attr("class", "legendBackground")
-      //     .attr("width", 326)
-      //     .attr("height", 175.6)
 
 
 
 
+      //create a legend item and append it to the legend
       var legendItem = legend.selectAll(".legendItem")
         .data(d3.range(5))
     		.enter()
@@ -222,7 +221,7 @@
     			.attr("class", "legenditem")
           .attr("transform", function(d, i) { return "translate( 20 ," + i * 31 + ")"; });
 
-
+      //assign a color value to the legend item
       legendItem.append("rect")
     		.attr("x", 10 )
     		.attr("y", 1)
@@ -232,6 +231,7 @@
     		.style("fill", function(d, i) { return legendColors[i]; })
         .style("stroke", "black" );
 
+      //assign text to each legend item
       legendItem.append("text")
       	.attr("x", 70)
       	.attr("y", 16)
@@ -239,49 +239,7 @@
       	.text(function(d, i) { return legendText[i]; });
     };
 
-    function updateLegend(legend,colorScale){
-      var legendText = []
 
-      for (var i=0; i<legendColors.length; i++){
-        var val = colorScale.invertExtent(legendColors[i]);
-        //legendText.push(val[0] + " - " + val[1])
-        //legendText.push(val[1])
-        if (val[0] == undefined){
-          val[0] = 0
-        };
-        if (val[1] == undefined){
-          val[1] = "+"
-        };
-        legendText.push(val[0] + " - " + val[1])
-
-
-      };
-
-      legendText[4] = legendText[4].replace(' - ',' ')
-
-
-      var legendItem = legend.selectAll(".legendItem")
-        .data(d3.range(5))
-    		.enter()
-    		.append("g")
-    			.attr("class", "legenditem")
-          .attr("transform", function(d, i) { return "translate( 20 ," + i * 31 + ")"; });
-
-
-      legendItem.append("rect")
-    		.attr("x", 10 )
-    		.attr("y", 0)
-    		.attr("width", 20)
-    		.attr("height", 20)
-    		.attr("class", "rect")
-    		.style("fill", function(d, i) { return legendColors[i]; });
-
-      legendItem.append("text")
-      	.attr("x", 70)
-      	.attr("y", 15)
-      	.style("text-anchor", "left")
-      	.text(function(d, i) { return legendText[i]; });
-    };
 
     //function to create color scale generator
     function makeColorScale(data){
@@ -349,6 +307,7 @@
             .attr("height", chartInnerHeight)
             .attr("transform", translate);
 
+        //append the NSAA Logo to the Chart
         var chartImage = chart.append("image")
             .attr('xlink:href', 'img/nsaa.png')
             .attr('width', 151)
@@ -381,13 +340,6 @@
 
 
 
-        //create a text element for the chart title
-        // var chartTitle = chart.append("text")
-        //     .attr("x", 40)
-        //     .attr("y", 40)
-        //     .attr("class", "chartTitle")
-        //     .text("Number of " + expressed + " Championships per school in each county");
-
         //create vertical axis generator
         var yAxis = d3.svg.axis()
             .scale(yScale)
@@ -411,6 +363,8 @@
 
 
     }; //end of setChart
+
+    //function to create the heading of the page
     function createHead(){
       var head = d3.select("body")
           .append("svg")
@@ -418,13 +372,13 @@
           .attr("height", 50)
           .attr("class", "head");
 
-      //create a rectangle for chart background fill
+      //create a rectangle for header background fill
       var headBackground = head.append("rect")
           .attr("class", "headBackground")
           .attr("width", window.innerWidth )
           .attr("height", 50);
 
-
+        //append the text to the header
       var headName = head.append("text")
         .attr("x", 40)
         .attr("y", 40)
@@ -434,34 +388,26 @@
 
     }
 
-
+    //function to create the interactive text
     function createTitle(attribute){
-      var title = d3.select("body")
+      var title = d3.select("body")//create the title svg
           .append("svg")
           .attr("width", 900)
           .attr("height", 50)
           .attr("class", "title");
 
-      //create a rectangle for chart background fill
+      //create a rectangle for titlebox background fill
       var titleBackground = title.append("rect")
           .attr("class", "titleBackground")
           .attr("width", 900)
           .attr("height", 50);
 
-
+          //append the interactive text to the title box
       var titleName = title.append("text")
         .attr("x",30)
         .attr("y", 30)
         .attr("class", "titleName")
         .text(expressed + " Championships per school in each county");
-
-      // var titleName = title.append("text")
-      //     .attr("x",30)
-      //     .attr("y", 60)
-      //     .attr("class", "titleName")
-      //     .text("per school in each county last 5 seasons");
-
-
 
     };
 
@@ -490,7 +436,7 @@
             .text(function(d){ return d });
     };
 
-    //Example 1.4 line 14...dropdown change listener handler
+    //dropdown change listener handler
     function changeAttribute(attribute, csvData){
         //change the expressed attribute
         expressed = attribute;
@@ -506,7 +452,7 @@
                 return choropleth(d.properties, colorScale)
             });
 
-       //Example 1.7 line 22...re-sort, resize, and recolor bars
+       //re-sort, resize, and recolor bars
         var bars = d3.selectAll(".bar")
             //re-sort bars
             .sort(function(a, b){
@@ -517,16 +463,19 @@
                 return i * 20
             })
             .duration(500);
-
+        // create a new legend svg
         var legend = d3.selectAll(".legend")
             .append("svg")
                 // .attr("width", 200)
                 // .attr("height", 30)
             .attr("class", "legend")
-        d3.select(".legend").remove();
 
+        d3.select(".legend").remove();//remove the old legend svg
 
+        //call the update chart function
         updateChart(bars, csvData.length, colorScale);
+
+        //create a new legend with the newly referenced data
         createLegend(colorScale);
 
         var titleName = d3.select(".titleName")
@@ -590,7 +539,7 @@
 
         };
 
-        //below Example 2.4 line 21...remove info label
+        //remove info label
         d3.select(".infolabel")
             .remove();
     };
@@ -611,13 +560,13 @@
             .attr("id", props.FIPSCode + "_label")
             .html(labelAttribute);
 
-
+        //add the county name to the info label
         var countyName = infolabel.append("div")
             .attr("class", "labelname")
             .html(props.Counties);
     };
 
-    //Example 2.8 line 1...function to move info label with mouse
+    //function to move info label with mouse
     function moveLabel(){
         //get width of label
         var labelWidth = d3.select(".infolabel")
