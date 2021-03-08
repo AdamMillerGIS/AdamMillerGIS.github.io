@@ -4,16 +4,18 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="author" content="Adam Miller">
     <meta name="generator" content="Hugo 0.80.0">
-    <title>Starter Template · Bootstrap v5.0</title>
+    <title>Sports Atlas</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/starter-template/">
 
 
 
+
+
     <!-- Bootstrap core CSS -->
-    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
 
     <style>
       .bd-placeholder-img {
@@ -36,53 +38,132 @@
     <link href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" rel="stylesheet">
     <!-- Include CARTO.js -->
     <script src="https://libs.cartocdn.com/carto.js/v4.2.0/carto.min.js"></script>
-    <link href="../css/starter-template.css" rel="stylesheet">
+    <link href="css/starter-template.css" rel="stylesheet">
+
+    <script src="https://api.mqcdn.com/sdk/mapquest-js/v1.3.2/mapquest.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://api.mqcdn.com/sdk/mapquest-js/v1.3.2/mapquest.css"/>
+
+    <!--  jQuery -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+    <!-- Bootstrap Date-Picker Plugin -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+
+
   </head>
   <body>
 
-<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">Navbar</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">LOGO</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
 
-    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-      <ul class="navbar-nav me-auto mb-2 mb-md-0">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-bs-toggle="dropdown" aria-expanded="false">Dropdown</a>
-          <ul class="dropdown-menu" aria-labelledby="dropdown01">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+          <ul class="navbar-nav me-auto mb-2 mb-md-0">
+            <!-- <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Link</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+            </li> -->
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="dropdownLeague" data-bs-toggle="dropdown" aria-expanded="false">Select A League</a>
+              <ul class="dropdown-menu" aria-labelledby="dropdown01">
+                <li><a class="dropdown-item" href="#">MLB</a></li>
+                <li><a class="dropdown-item" href="#">MILB</a></li>
+                <li><a class="dropdown-item" href="#">MLS</a></li>
+                <li><a class="dropdown-item" href="#">NBA</a></li>
+                <li><a class="dropdown-item" href="#">NFL</a></li>
+                <li><a class="dropdown-item" href="#">NHL</a></li>
+                <li><a class="dropdown-item" href="#">WNBA</a></li>
+              </ul>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="dropdownSport" data-bs-toggle="dropdown" aria-expanded="false">Select A Sport</a>
+              <ul class="dropdown-menu" aria-labelledby="dropdown01">
+                <li><a class="dropdown-item" href="#">Baseball</a></li>
+                <li><a class="dropdown-item" href="#">Basketball</a></li>
+                <li><a class="dropdown-item" href="#">Football</a></li>
+                <li><a class="dropdown-item" href="#">Hockey</a></li>
+                <li><a class="dropdown-item" href="#">Soccer</a></li>
+                <li><a class="dropdown-item" href="#">All</a></li>
+              </ul>
+            </li>
           </ul>
-        </li>
-      </ul>
-      <form class="d-flex">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
-    </div>
-  </div>
-</nav>
 
-<main class="container-fluid" >
+          <div id="searchbox">
+              <select id="selectDrop">
+                      <option selected value="">Select Team</option>
+              </select>
+          </div>
+        </div>
+      </div>
+    </nav>
 
-  <div id="map" height=500px></div>
+    <!-- The sidebar -->
+    <div class="sidebar">
+      <div class="btn-group" role="group" aria-label="Basic example">
+        <button type="button" class="btn btn-secondary btn-lg active" >Left</button>
+        <button type="button" class="btn btn-secondary">Middle</button>
+        <button type="button" class="btn btn-secondary">Right</button>
+      </div>
 
-</main><!-- /.container -->
 
-    <script src="../js/map.js"></script>
-    <script src="../js/bootstrap.bundle.min.js"></script>
+      <div class="box">
+           <section>
+             <p class="description open-sans">Click on the map to find out more about each team</p>
+             <div class="separator"></div>
+             <div id="searchbox">
+                 <select id="directDrop1">
+                         <option selected value="">Select Team</option>
+                 </select>
+             </div>
+             <p class="description open-sans">TO:</p>
+             <div id="searchbox">
+                 <select id="directDrop2">
+                         <option selected value="">Select Team</option>
+                 </select>
+             </div>
+             <p class="description open-sans"> </p>
+             <button type="button" id="submitDirections" class="btn btn-primary">Get Directions</button>
+             <div id="controls">
+               <div id="info2"></div>
+             </div>
+             <!-- Form code begins -->
+              <form method="post">
+                <div class="form-group"> <!-- Date input -->
+                  <label class="control-label" for="date">Date</label>
+                  <input class="form-control" id="date" name="date" placeholder="MM/DD/YYY" type="text"/>
+                </div>
+
+               </form>
+               <!-- Form code ends -->
+               <div id="submit-button"> <!-- Submit button -->
+                 <button class="btn btn-primary " id="submit" type="submit">Submit</button>
+               </div>
+           </section>
+           <footer class="js-footer"></footer>
+         </div>
+
+         </aside>
+       </div>
+
+    <div class="content">
+
+      <div id="map" height=500px></div>
+
+
+
+    </div><!-- /.container -->
+
+    <script src="js/map.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
     <script src="https://libs.cartocdn.com/cartodb.js/v3/3.15/cartodb.js"></script>
 
   </body>
