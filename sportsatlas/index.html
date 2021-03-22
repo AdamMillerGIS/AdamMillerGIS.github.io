@@ -72,29 +72,6 @@
             <li class="nav-item">
               <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
             </li> -->
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="dropdownLeague" data-bs-toggle="dropdown" aria-expanded="false">Select A League</a>
-              <ul class="dropdown-menu" aria-labelledby="dropdown01">
-                <li><a class="dropdown-item" href="#">MLB</a></li>
-                <li><a class="dropdown-item" href="#">MILB</a></li>
-                <li><a class="dropdown-item" href="#">MLS</a></li>
-                <li><a class="dropdown-item" href="#">NBA</a></li>
-                <li><a class="dropdown-item" href="#">NFL</a></li>
-                <li><a class="dropdown-item" href="#">NHL</a></li>
-                <li><a class="dropdown-item" href="#">WNBA</a></li>
-              </ul>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="dropdownSport" data-bs-toggle="dropdown" aria-expanded="false">Select A Sport</a>
-              <ul class="dropdown-menu" aria-labelledby="dropdown01">
-                <li><a class="dropdown-item" href="#">Baseball</a></li>
-                <li><a class="dropdown-item" href="#">Basketball</a></li>
-                <li><a class="dropdown-item" href="#">Football</a></li>
-                <li><a class="dropdown-item" href="#">Hockey</a></li>
-                <li><a class="dropdown-item" href="#">Soccer</a></li>
-                <li><a class="dropdown-item" href="#">All</a></li>
-              </ul>
-            </li>
           </ul>
 
           <div id="searchbox">
@@ -109,44 +86,67 @@
     <!-- The sidebar -->
     <div class="sidebar">
       <div class="btn-group" role="group" aria-label="Basic example">
-        <button type="button" class="btn btn-secondary btn-lg active" >Left</button>
-        <button type="button" class="btn btn-secondary">Middle</button>
-        <button type="button" class="btn btn-secondary">Right</button>
+        <button type="button" class="btn btn-secondary" onclick="showInfo()">Info</button>
+        <button type="button" class="btn btn-secondary" onclick="showDirections()">Directions</button>
+        <button type="button" class="btn btn-secondary" onclick="showFilter()">Filter</button>
+        <button type="button" class="btn btn-secondary" onclick="showDate()">Date</button>
       </div>
 
 
       <div class="box">
            <section>
-             <p class="description open-sans">Click on the map to find out more about each team</p>
-             <div class="separator"></div>
-             <div id="searchbox">
-                 <select id="directDrop1">
-                         <option selected value="">Select Team</option>
-                 </select>
-             </div>
-             <p class="description open-sans">TO:</p>
-             <div id="searchbox">
-                 <select id="directDrop2">
-                         <option selected value="">Select Team</option>
-                 </select>
-             </div>
-             <p class="description open-sans"> </p>
-             <button type="button" id="submitDirections" class="btn btn-primary">Get Directions</button>
-             <div id="controls">
-               <div id="info2"></div>
-             </div>
-             <!-- Form code begins -->
-              <form method="post">
-                <div class="form-group"> <!-- Date input -->
-                  <label class="control-label" for="date">Date</label>
-                  <input class="form-control" id="date" name="date" placeholder="MM/DD/YYY" type="text"/>
-                </div>
-
-               </form>
-               <!-- Form code ends -->
-               <div id="submit-button"> <!-- Submit button -->
-                 <button class="btn btn-primary " id="submit" type="submit">Submit</button>
+             <section class="as-box" id = "infoBox">
+               <p class="description open-sans">Click on the map to find out more about each team</p>
+               <div id="controls">
+                 <div id="info2"></div>
                </div>
+             </section>
+             <section class="as-box" id = "directionsBox" style="display:none">
+               <div class="separator"></div>
+               <div id="searchbox">
+                   <select id="directDrop1">
+                           <option selected value="">Select Team</option>
+                   </select>
+               </div>
+               <p class="description open-sans">TO:</p>
+               <div id="searchbox">
+                   <select id="directDrop2">
+                           <option selected value="">Select Team</option>
+                   </select>
+               </div>
+               <p class="description open-sans"> </p>
+               <button type="button" id="submitDirections" class="btn btn-primary">Get Directions</button>
+             </section>
+
+             <section class="as-box" id = "filterBox" style="display:none">
+               <div class="separator"></div>
+               <div id="sportFilterbox">
+                   <select id="sportFilter">
+                           <option selected value="">Select Sport</option>
+                   </select>
+               </div>
+               <div id="leagueFilterbox">
+                   <select id="leagueFilter">
+                           <option selected value="">Select League</option>
+                   </select>
+               </div>
+             </section>
+
+
+             <section class="as-box" id = "dateBox" style="display:none">
+               <!-- Form code begins -->
+                <form method="post">
+                  <div class="form-group"> <!-- Date input -->
+                    <label class="control-label" for="date">Date</label>
+                    <input class="form-control" id="date" name="date" placeholder="MM/DD/YYY" type="text" data-date-format="MM/DD/YYYY"/>
+                  </div>
+
+                 </form>
+                 <!-- Form code ends -->
+                 <div id="submit-button"> <!-- Submit button -->
+                   <button class="btn btn-primary " id="submit" type="submit">Submit</button>
+                 </div>
+               </section>
            </section>
            <footer class="js-footer"></footer>
          </div>

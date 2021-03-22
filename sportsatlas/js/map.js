@@ -8,7 +8,7 @@ function main() {
   // });
 
 
-  
+
 
   L.mapquest.key = 'VSdCN6AdXZoLBKk7TgTb0TGmm0teyCst';
 
@@ -21,19 +21,20 @@ function main() {
 
 
 
+
+
   // populate dropdown menu
   populateDrowpDown()
   populateDrowpDowndir1()
   populateDrowpDowndir2()
+  populateDropDownSport()
+  populateDropDownLeague()
 
   // L.tileLayer('http://tile.stamen.com/toner/{z}/{x}/{y}.png', {
   //   attribution: 'Stamen'
   // }).addTo(map);
 
-  // L.mapquest.directions().route({
-  //   start: 'Yankee Stadium',
-  //   end: 'MetLife Stadium'
-  // });
+
 
   $(document).ready(function(){
         var date_input=$('input[name="date"]'); //our date input has the name "date"
@@ -49,19 +50,175 @@ function main() {
 
   document.getElementById("submit").addEventListener("click",function(){
       var selectedDate = $("#date").datepicker("getFormattedDate");
+      teamlist = []
       console.log(selectedDate)
+      // async function
+      async function fetchAsync (teamlist) {
+        // await response of fetch call
+        let response = await fetch(
+            `https://armiller34.carto.com/api/v2/sql?q=SELECT date, teamid FROM schedule WHERE date ='${selectedDate}'`);
+        // only proceed once promise is resolved
+        let data = await response.json();
+        // only proceed once second promise is resolved
+        for (const rows of data.rows) {
+            console.log(rows.teamid)
+            teamlist.push("'"+rows.teamid+"'")
+            console.log(teamlist)
+          }
+
+        return teamlist
+
+
+
+
+
+      }
+
+      // trigger async function
+      // log response or catch error of fetch promise
+      fetchAsync(teamlist)
+          .then(teamlist => {
+            console.log(teamlist)
+            var query = `
+              SELECT *
+                FROM armiller34.teamslist
+                WHERE scheduleid IN (` + teamlist + `)`;
+            console.log(query)
+            if (teamlist.length !== 0) {
+              teamSource.setQuery(query)
+            } else {
+              teamSource.setQuery(`SELECT * FROM armiller34.teamslist`)
+            };
+
+
+
+
+
+          })
+          .catch(reason => console.log(reason.message))
+
   });
+
+
 
   document.getElementById("submitDirections").addEventListener("click",function(){
     var teamOne = $('#directDrop1').val();
     var teamTwo = $('#directDrop2').val();
-    console.log(teamOne)
-    console.log(teamTwo)
 
-    L.mapquest.directions().route({
-      start: teamOne,
-      end: teamTwo
-    });
+
+
+
+    // async function
+    async function fetchAsync () {
+      // await response of fetch call
+      let response = await fetch(`
+          https://armiller34.carto.com/api/v2/sql?format=geojson&q=SELECT the_geom, address, city, state, zip  FROM teamslist WHERE team='${teamOne}'`);
+      // only proceed once promise is resolved
+      let data = await response.json();
+      // only proceed once second promise is resolved
+
+
+      let response2 = await fetch(`
+          https://armiller34.carto.com/api/v2/sql?format=geojson&q=SELECT the_geom, address, city, state, zip  FROM teamslist WHERE team='${teamTwo}'`);
+      // only proceed once promise is resolved
+      let data2 = await response2.json();
+      // only proceed once second promise is resolved
+      return [data,data2];
+
+    }
+
+    // trigger async function
+    // log response or catch error of fetch promise
+    fetchAsync()
+        .then(data => {
+          console.log(data[0]);
+          console.log(data[1]);
+          let siteOne = data[0]
+          let siteTwo = data[1]
+          console.log(siteOne)
+          console.log(siteTwo)
+          let string1 =
+          siteOne['features'].map(function(feature,string1){
+                  option = document.createElement("option")
+                  option.setAttribute("value", feature.properties.address+", "+feature.properties.city+", "+feature.properties.state+" "+feature.properties.zip)
+                  option.textContent = feature.properties.address
+
+                  string1 = option.value
+
+
+                  return string1
+                })
+
+
+
+          console.log(string1)
+          string1 = JSON.stringify(string1);
+          console.log(string1)
+          string1 = string1.slice(1,-1);
+          console.log(string1)
+
+          let string2 =
+          siteTwo['features'].map(function(feature,string2){
+                  option = document.createElement("option")
+                  option.setAttribute("value", feature.properties.address+", "+feature.properties.city+", "+feature.properties.state+" "+feature.properties.zip)
+                  option.textContent = feature.properties.address
+
+                  string2 = (option.value)
+                  return string2
+                })
+
+
+
+          console.log(string2)
+          string2 = JSON.stringify(string2);
+          console.log(string2)
+          string2 = string2.slice(1,-1);
+          console.log(string2)
+
+          var directions = L.mapquest.directions().route({
+            start: string1,
+            end: string2,
+            options: {
+              enhancedNarrative: true
+            }
+          });
+
+          let directionsControl = L.mapquest.directionsControl({
+            endInput: {
+              disabled: true,
+              geolocation: {
+                enabled: false
+              },
+            },
+            startInput: {
+              disabled: true,
+              geolocation: {
+                enabled: false
+              },
+            },
+            addDestinationButton: {
+              enabled: false
+            }
+          }).addTo(map);
+
+          directionsControl.setFirstDestination({
+            street: {
+              string2
+            }
+          });
+
+          directionsControl.setStart({
+            street: string1
+          });
+
+
+
+
+
+
+        })
+        .catch(reason => console.log(reason.message))
+
   });
 
 
@@ -74,11 +231,7 @@ function main() {
     username: 'armiller34'
   });
 
-  // var myDropdown = document.getElementById('leaguedropdown')
-  //   myDropdown.addEventListener('show.bs.dropdown', function () {
-  //     // do something...
-  //     console.log("You're a genius");
-  //   })
+
 
 
 
@@ -90,7 +243,7 @@ function main() {
 
   const teamStyle = new carto.style.CartoCSS(`
     #layer {
-      marker-width: 7;
+      marker-width: 10;
       marker-fill-opacity: 0.9;
       marker-line-color: #FFF;
       marker-line-width: 1;
@@ -160,6 +313,20 @@ function main() {
               console.log(error)
           })
   }
+
+  // when select option from downdown menu, change bounding box of map
+  // to geometry of the selected country
+   document.getElementById('selectDrop').addEventListener("change", function (e) {
+       input = e.currentTarget.selectedOptions[0].attributes[0].value;
+       return  fetch(`https://armiller34.carto.com/api/v2/sql?format=geojson&q=SELECT * FROM teamslist where team Ilike '${input}'`)
+       .then((resp) => resp.json())
+       .then((response) => {
+           geojsonLayer = L.geoJson(response)
+           map.fitBounds(geojsonLayer.getBounds());
+       })
+   });
+
+
   function populateDrowpDowndir1(){
       return fetch(
           `https://armiller34.carto.com/api/v2/sql?format=geojson&q=SELECT the_geom, team FROM teamslist ORDER BY team ASC`
@@ -192,39 +359,171 @@ function main() {
           })
   }
 
-  // when select option from downdown menu, change bounding box of map
- // to geometry of the selected country
-   document.getElementById('selectDrop').addEventListener("change", function (e) {
-       input = e.currentTarget.selectedOptions[0].attributes[0].value;
-       return  fetch(`https://armiller34.carto.com/api/v2/sql?format=geojson&q=SELECT * FROM teamslist where team Ilike '${input}'`)
-       .then((resp) => resp.json())
-       .then((response) => {
-           geojsonLayer = L.geoJson(response)
-           map.fitBounds(geojsonLayer.getBounds());
-       })
-   });
+  function populateDropDownSport(){
+    var workers = ["All","Baseball", "Basketball", "Football","Hockey","Soccer"];
+
+    $('#sportFilter').html( $.map(workers, function(i){
+         return '<option value="' + i + '">'+ i + '</option>';
+    }).join('') );
   }
 
+  document.getElementById('sportFilter').addEventListener("change", function (e) {
+    input = e.currentTarget.selectedOptions[0].attributes[0].value;
+    var query = `
+      SELECT *
+        FROM armiller34.teamslist
+        WHERE sport ='` + input + `'`;
+    if (input !== "All") {
+      teamSource.setQuery(query)
+    } else {
+      teamSource.setQuery(`SELECT * FROM armiller34.teamslist`)
+    };
+  });
+
+  function populateDropDownLeague(){
+    var workers = ["All","MLB", "MILB", "MLS","NBA","NFL","NHL","WNBA"];
+
+    $('#leagueFilter').html( $.map(workers, function(i){
+         return '<option value="' + i + '">'+ i + '</option>';
+    }).join('') );
+  }
+
+  document.getElementById('leagueFilter').addEventListener("change", function (e) {
+    input = e.currentTarget.selectedOptions[0].attributes[0].value;
+    var query = `
+      SELECT *
+        FROM armiller34.teamslist
+        WHERE league ='` + input + `'`;
+    if (input !== "All") {
+      teamSource.setQuery(query)
+    } else {
+      teamSource.setQuery(`SELECT * FROM armiller34.teamslist`)
+    };
+  });
 
 
 
-//   cartodb.createLayer(map, 'http://documentation.cartodb.com/api/v2/viz/2b13c956-e7c1-11e2-806b-5404a6a683d5/viz.json')
-//       .addTo(map)
-//    .on('done', function(layer) {
-//
-//     layer.setInteraction(true);
-//
-//     layer.on('featureOver', function(e, latlng, pos, data) {
-//       cartodb.log.log(e, latlng, pos, data);
-//     });
-//
-//     layer.on('error', function(err) {
-//       cartodb.log.log('error: ' + err);
-//     });
-//   }).on('error', function() {
-//     cartodb.log.log("some error occurred");
-//   });
-// }
 
-// you could use $(window).load(main);
+
+
+
+
+
+
+  }
+
+  function showDirections() {
+     var directionsbox = document.getElementById("directionsBox");
+     var infobox = document.getElementById("infoBox");
+     var datebox = document.getElementById("dateBox");
+     var filterbox = document.getElementById("filterBox");
+     if (directionsbox.style.display === "none") {
+       directionsbox.style.display = "block";
+     }
+     if (infobox.style.display === "block") {
+       infobox.style.display = "none";
+     } else {
+       infobox.style.display = "none";
+     }
+     if (datebox.style.display === "block") {
+       datebox.style.display = "none";
+     } else {
+       datebox.style.display = "none";
+     }
+     if (filterbox.style.display === "block") {
+       filterbox.style.display = "none";
+     } else {
+       filterbox.style.display = "none";
+     }
+   }
+
+   function showInfo() {
+     var infobox = document.getElementById("infoBox");
+     var directionsbox = document.getElementById("directionsBox");
+     var datebox = document.getElementById("dateBox");
+     var filterbox = document.getElementById("filterBox");
+     if (infobox.style.display === "none") {
+       infobox.style.display = "block";
+     }
+     if (directionsbox.style.display === "block") {
+       directionsbox.style.display = "none";
+     } else {
+       directionsbox.style.display = "none";
+     }
+     if (datebox.style.display === "block") {
+       datebox.style.display = "none";
+     } else {
+       datebox.style.display = "none";
+     }
+     if (filterbox.style.display === "block") {
+       filterbox.style.display = "none";
+     } else {
+       filterbox.style.display = "none";
+     }
+   }
+
+   function showDate() {
+     var infobox = document.getElementById("infoBox");
+     var directionsbox = document.getElementById("directionsBox");
+     var datebox = document.getElementById("dateBox");
+     var filterbox = document.getElementById("filterBox");
+     if (datebox.style.display === "none") {
+       datebox.style.display = "block";
+     }
+     if (directionsbox.style.display === "block") {
+       directionsbox.style.display = "none";
+     } else {
+       directionsbox.style.display = "none";
+     }
+     if (infobox.style.display === "block") {
+       infobox.style.display = "none";
+     } else {
+       infobox.style.display = "none";
+     }
+     if (filterbox.style.display === "block") {
+       filterbox.style.display = "none";
+     } else {
+       filterbox.style.display = "none";
+     }
+   }
+
+   function showFilter() {
+     var infobox = document.getElementById("infoBox");
+     var directionsbox = document.getElementById("directionsBox");
+     var datebox = document.getElementById("dateBox");
+     var filterbox = document.getElementById("filterBox");
+     if (filterbox.style.display === "none") {
+       filterbox.style.display = "block";
+     }
+     if (directionsbox.style.display === "block") {
+       directionsbox.style.display = "none";
+     } else {
+       directionsbox.style.display = "none";
+     }
+     if (infobox.style.display === "block") {
+       infobox.style.display = "none";
+     } else {
+       infobox.style.display = "none";
+     }
+     if (datebox.style.display === "block") {
+       datebox.style.display = "none";
+     } else {
+       datebox.style.display = "none";
+     }
+   }
+
+   $(document).ready(function(){
+    var date_input=$('input[name="date"]'); //our date input has the name "date"
+    var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+    var options={
+      format: 'm/dd/yyyy',
+      container: container,
+      todayHighlight: true,
+      autoclose: true,
+    };
+    date_input.datepicker(options);
+  })
+
+
+
 window.onload = main;
