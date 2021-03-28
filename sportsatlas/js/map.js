@@ -34,6 +34,24 @@ function main() {
   //   attribution: 'Stamen'
   // }).addTo(map);
 
+  /*Legend specific*/
+  var legend = L.control({ position: "bottomright" });
+
+  legend.onAdd = function(map) {
+    var div = L.DomUtil.create("div", "legend");
+    div.innerHTML += "<h4>Professional Teams</h4>";
+    div.innerHTML += '<i class="dot" style="background: #B54213"></i><span>Basketball</span><br>';
+    div.innerHTML += '<i class="dot" style="background: #b72126"></i><span>Baseball</span><br>';
+    div.innerHTML += '<i class="dot" style="background: #656760"></i><span>Hockey</span><br>';
+    div.innerHTML += '<i class="dot" style="background: #91672C"></i><span>Football</span><br>';
+    div.innerHTML += '<i class="dot" style="background: #45b6fe"></i><span>Soccer</span><br>';
+
+
+
+    return div;
+  };
+
+  legend.addTo(map);
 
 
   $(document).ready(function(){
@@ -282,6 +300,10 @@ function main() {
   // console.log(currentLayers);
   client.getLeafletLayer().addTo(map);
 
+  // teamLayer.on('featureOver', function(e, latlng, pos, data, subLayerIndex) {
+  //   console.log("mouse over polygon with data: " + e.data.team);
+  // });
+
   teamLayer.on('featureClicked', featureEvent => {
     const content = `
       <h5>${featureEvent.data.team}</h5>
@@ -295,7 +317,41 @@ function main() {
     `;
 
     document.getElementById('info2').innerHTML = content;
+    console.log(featureEvent.data)
   });
+
+  const popup = L.popup({ closeButton: false });
+
+  function openPopup(featureEvent) {
+          let content = '<div class="widget">';
+
+          if (featureEvent.data.team || featureEvent.data.stadiumname ) {
+            content += `<h6>${featureEvent.data.team}</h6>`;
+
+            content +=  `<h6>${featureEvent.data.stadiumname}</h6>`;
+          }
+
+          content += `</div>`;
+          console.log(content)
+          popup.setContent(content);
+          popup.setLatLng(featureEvent.latLng);
+          if (!popup.isOpen()) {
+            popup.openOn(map);
+          }
+        }
+
+  function closePopup(featureEvent) {
+    popup.removeFrom(map);
+  }
+
+
+
+
+    teamLayer.on('featureOver', openPopup);
+    teamLayer.on('featureOut', closePopup);
+
+
+
 
   // function to get list of country names to populate dropdown menu
   function populateDrowpDown(){
@@ -314,6 +370,7 @@ function main() {
           })
   }
 
+
   // when select option from downdown menu, change bounding box of map
   // to geometry of the selected country
    document.getElementById('selectDrop').addEventListener("change", function (e) {
@@ -323,6 +380,7 @@ function main() {
        .then((response) => {
            geojsonLayer = L.geoJson(response)
            map.fitBounds(geojsonLayer.getBounds());
+
        })
    });
 
@@ -375,8 +433,11 @@ function main() {
         WHERE sport ='` + input + `'`;
     if (input !== "All") {
       teamSource.setQuery(query)
+      document.getElementById('sportFilter')
+
     } else {
       teamSource.setQuery(`SELECT * FROM armiller34.teamslist`)
+      $("leagueFilter").val("All");
     };
   });
 
@@ -398,6 +459,7 @@ function main() {
       teamSource.setQuery(query)
     } else {
       teamSource.setQuery(`SELECT * FROM armiller34.teamslist`)
+      $("sportFilter").val("All");
     };
   });
 

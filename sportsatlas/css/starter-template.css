@@ -3,7 +3,7 @@ body {
 }
 
 #map {
-  height: 85vh;
+  height: 90vh;
   padding: 0;
   margin: 0;
 }
@@ -15,7 +15,7 @@ body {
   width: 300px;
   background-color: #f1f1f1;
   position: fixed;
-  height: 100%;
+  height: 90vh;
   overflow: auto;
 }
 
@@ -43,7 +43,7 @@ body {
 div.content {
   margin-left: 300px;
   padding: 1px 16px;
-  height: 1000px;
+  height: 90vh;
 }
 
 /* On screens that are less than 700px wide, make the sidebar into a topbar */
@@ -81,6 +81,44 @@ div.content {
     width: 200px;
 }
 
+#sportFilter {
+
+    opacity: 0.8;
+
+    width: auto;
+    height: auto;
+    padding: 5px;
+    display: block;
+    z-index: 9000;
+    width: 150px;
+}
+
+#sidebarButtons{
+  padding:20px
+}
+
+#leagueFilter {
+
+    opacity: 0.8;
+
+    width: auto;
+    height: auto;
+    padding: 5px;
+    display: block;
+    z-index: 9000;
+    width: 150px;
+}
+
+#sportFilterbox{
+  padding: 10px;
+}
+
+#leagueFilterbox{
+  padding:10px;
+}
+
+
+
 a:link {
   color: blue;
   background-color: transparent;
@@ -103,4 +141,49 @@ a:active {
   color: yellow;
   background-color: transparent;
   text-decoration: underline;
+}
+
+/*Legend specific*/
+.legend {
+  padding: 6px 8px;
+  font: 14px Arial, Helvetica, sans-serif;
+  background: white;
+  background: rgba(255, 255, 255, 0.8);
+  /*box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);*/
+  /*border-radius: 5px;*/
+  line-height: 24px;
+  color: #555;
+}
+.legend h4 {
+  text-align: center;
+  font-size: 16px;
+  margin: 2px 12px 8px;
+  color: #777;
+}
+
+.legend span {
+  position: relative;
+  bottom: 3px;
+}
+
+.legend i {
+  width: 18px;
+  height: 18px;
+  float: left;
+  margin: 0 8px 0 0;
+  opacity: 0.7;
+}
+
+.legend i.icon {
+  background-size: 18px;
+  background-color: rgba(255, 255, 255, 1);
+}
+
+.legend i.dot {
+  height: 12px;
+  width: 12px;
+  background-color: #bbb;
+  border-radius: 50%;
+  border-color: #FFF
+
 }
