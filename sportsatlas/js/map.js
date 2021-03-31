@@ -54,6 +54,7 @@ function main() {
   legend.addTo(map);
 
 
+
   $(document).ready(function(){
         var date_input=$('input[name="date"]'); //our date input has the name "date"
         var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
@@ -117,11 +118,30 @@ function main() {
 
   });
 
+  document.getElementById("clearDirections").addEventListener("click",function(){
 
+    map.removeControl(directionsControl);
+
+    map.invalidateSize()
+
+    map.off();
+    map.remove();
+
+    main()
+
+
+
+    $("#directDrop1").val('default');
+    $("#directDrop2").val('default');
+
+    document.getElementById("clearDirections").disabled = true;
+
+  });
 
   document.getElementById("submitDirections").addEventListener("click",function(){
     var teamOne = $('#directDrop1').val();
     var teamTwo = $('#directDrop2').val();
+
 
 
 
@@ -193,41 +213,10 @@ function main() {
           string2 = string2.slice(1,-1);
           console.log(string2)
 
-          var directions = L.mapquest.directions().route({
-            start: string1,
-            end: string2,
-            options: {
-              enhancedNarrative: true
-            }
-          });
 
-          let directionsControl = L.mapquest.directionsControl({
-            endInput: {
-              disabled: true,
-              geolocation: {
-                enabled: false
-              },
-            },
-            startInput: {
-              disabled: true,
-              geolocation: {
-                enabled: false
-              },
-            },
-            addDestinationButton: {
-              enabled: false
-            }
-          }).addTo(map);
+          getdirections(string1,string2,directionsControl,directions)
 
-          directionsControl.setFirstDestination({
-            street: {
-              string2
-            }
-          });
-
-          directionsControl.setStart({
-            street: string1
-          });
+          document.getElementById("clearDirections").disabled = false;
 
 
 
@@ -239,8 +228,65 @@ function main() {
 
   });
 
+  let directionsControl = L.mapquest.directionsControl({
+    endInput: {
+      disabled: true,
+      geolocation: {
+        enabled: false
+      },
+    },
+    startInput: {
+      disabled: true,
+      geolocation: {
+        enabled: false
+      },
+    },
+    addDestinationButton: {
+      enabled: false
+    }
+  })
+
+  let directions = L.mapquest.directions()
+
+  let directionsLayer
+
+function getdirections(siteOne,siteTwo,directionsControl,directions,directionsLayer){
 
 
+    directions.route({
+      start: siteOne,
+      end: siteTwo,
+      options: {
+        enhancedNarrative: true
+      }
+    }, directionsCallback);
+
+
+
+    function directionsCallback(error, response,directionsLayer) {
+      directionsLayer = L.mapquest.directionsLayer({
+        directionsResponse: response
+      }).addTo(map);
+      console.log(directionsLayer)
+      return directionsLayer;
+
+    }
+
+
+    console.log(directionsLayer)
+    directionsControl.addTo(map);
+
+    directionsControl.setFirstDestination({
+      street: {
+        siteTwo
+      }
+    });
+
+    directionsControl.setStart({
+      street: siteOne
+    });
+
+}
 
 
 
@@ -251,7 +297,7 @@ function main() {
 
 
 
-
+//
 
 
   const teamSource = new carto.source.SQL(`

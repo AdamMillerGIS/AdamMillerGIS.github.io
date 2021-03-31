@@ -97,11 +97,11 @@
       </div>
 
 
-      <div class="box">
+      <div class="box center-block text-center">
            <section>
              <section class="as-box" id = "infoBox">
                <p class="description open-sans">Click on the map to find out more about each team</p>
-               
+
                <div id="controls">
                  <div id="info2"></div>
                </div>
@@ -121,6 +121,7 @@
                </div>
                <p class="description open-sans"> </p>
                <button type="button" id="submitDirections" class="btn btn-primary">Get Directions</button>
+               <button type="button" id="clearDirections" class="btn btn-primary" disabled>Clear Directions</button>
              </section>
 
              <section class="as-box" id = "filterBox" style="display:none">
@@ -137,6 +138,12 @@
                            <option selected value="">Select League</option>
                    </select>
                </div>
+               <div class="btn-group-lg center-block text-center" role="group" aria-label="League Button Group" id=leagueButtons>
+                 <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="NFL"onclick="showInfo()"><img src="/img/NFL.svg" alt="NFL" width="32" height="32"></button>
+                 <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title=""onclick="showDirections()"><i class="bi bi-signpost-2"></i></button>
+                 <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Filter Map" onclick="showFilter()"><i class="bi bi-funnel"></i></button>
+                 <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Select a Date"onclick="showDate()"><i class="bi bi-calendar-event"></i></button>
+               </div>
              </section>
 
 
@@ -144,7 +151,7 @@
                <!-- Form code begins -->
                 <form method="post">
                   <div class="form-group"> <!-- Date input -->
-                    <label class="control-label" for="date">Date</label>
+                    <label class="control-label" for="date">Select a date to see which teams have home games.</label>
                     <input class="form-control" id="date" name="date" placeholder="MM/DD/YYY" type="text" data-date-format="MM/DD/YYYY"/>
                   </div>
 
