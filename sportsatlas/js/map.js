@@ -122,6 +122,9 @@ function main() {
 
     map.removeControl(directionsControl);
 
+    $('#selectDrop').find('option:not(:first)').remove();
+    $('#directDrop1').find('option:not(:first)').remove();
+    $('#directDrop2').find('option:not(:first)').remove();
     map.invalidateSize()
 
     map.off();
@@ -363,6 +366,7 @@ function getdirections(siteOne,siteTwo,directionsControl,directions,directionsLa
     `;
 
     document.getElementById('info2').innerHTML = content;
+    showInfo()
     console.log(featureEvent.data)
   });
 
@@ -485,6 +489,7 @@ function getdirections(siteOne,siteTwo,directionsControl,directions,directionsLa
       teamSource.setQuery(`SELECT * FROM armiller34.teamslist`)
       $("leagueFilter").val("All");
     };
+    populateDropDownLeague()
   });
 
   function populateDropDownLeague(){
@@ -507,8 +512,22 @@ function getdirections(siteOne,siteTwo,directionsControl,directions,directionsLa
       teamSource.setQuery(`SELECT * FROM armiller34.teamslist`)
       $("sportFilter").val("All");
     };
+    populateDropDownSport()
   });
 
+  document.getElementById('clearFilters').addEventListener("click", function(){
+    teamSource.setQuery(`SELECT * FROM armiller34.teamslist`)
+    populateDropDownSport()
+    populateDropDownLeague()
+    $("#date").val('');
+  })
+
+  document.getElementById('clearFilters2').addEventListener("click", function(){
+    teamSource.setQuery(`SELECT * FROM armiller34.teamslist`)
+    populateDropDownSport()
+    populateDropDownLeague()
+    $("#date").val('');
+  })
 
 
 

@@ -117,6 +117,19 @@ div.content {
   padding:10px;
 }
 
+#clearFilters2{
+  margin:5px;
+}
+
+#submit{
+  margin:5px;
+}
+
+#date{
+  margin:5px;
+}
+
+
 
 
 a:link {
