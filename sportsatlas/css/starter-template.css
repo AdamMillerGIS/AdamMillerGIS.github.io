@@ -1,5 +1,5 @@
 body {
-  padding-top: 4rem;
+  padding-top: 3.8rem;
 }
 
 #map {
@@ -13,17 +13,18 @@ body {
   margin: 0;
   padding: 0;
   width: 300px;
-  background-color: #f1f1f1;
+  background-color: #2B3252;
   position: fixed;
   height: 90vh;
   overflow: auto;
+  color: white
 }
 
 /* Sidebar links */
 .sidebar a {
   display: block;
   color: black;
-  padding: 16px;
+  padding: 0;
   text-decoration: none;
 }
 
@@ -42,7 +43,6 @@ body {
 /* Page content. The value of the margin-left property should match the value of the sidebar's width property */
 div.content {
   margin-left: 300px;
-  padding: 1px 16px;
   height: 90vh;
 }
 
@@ -63,6 +63,10 @@ div.content {
     text-align: center;
     float: none;
   }
+}
+
+.navbar-custom{
+  background-color: #EF5455;
 }
 
 #selectDrop {
