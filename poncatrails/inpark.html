@@ -1,0 +1,140 @@
+
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Basic Layout</title>
+  <link rel="stylesheet" href="https://libs.cartocdn.com/airship-style/v2.4.1/airship.css">
+  <script type="module" src="https://libs.cartocdn.com/airship-components/v2.4.1/airship/airship.esm.js"></script>
+  <script nomodule="" src="https://libs.cartocdn.com/airship-components/v2.4.1/airship/airship.js"></script>
+  <!-- Include Icons -->
+  <link rel="stylesheet" href="https://libs.cartocdn.com/airship-icons/v2.4.1/icons.css">
+  <!--
+
+  <script src="https://libs.cartocdn.com/mapbox-gl/v0.48.0-carto1/mapbox-gl.js"></script>
+
+  <link href="https://libs.cartocdn.com/mapbox-gl/v0.48.0-carto1/mapbox-gl.css" rel="stylesheet" />
+
+  <script src="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js"></script>
+  <link href="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css" rel="stylesheet" />
+  -->
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600,700|Open+Sans:300,400,600" rel="stylesheet">
+  <!-- Include Leaflet -->
+  <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"></script>
+  <link href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" rel="stylesheet">
+  <!-- Include CARTO.js -->
+  <script src="https://libs.cartocdn.com/carto.js/v4.2.0/carto.min.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:600" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+  <link href="https://carto.com/developers/carto-js/examples/maps/public/style.css" rel="stylesheet">
+
+
+  <style>
+    .map-area-text {
+      position: absolute;
+      z-index: 10;
+      top: 24px;
+      left: 8px;
+      padding: 8px;
+      background-color: #FFF;
+    }
+
+    .panel-text {
+      margin-right: 8px;
+      padding: 8px;
+      background-color: #FFF;
+    }
+  </style>
+</head>
+
+<body class="as-app-body as-app">
+
+
+  <header class="as-toolbar">
+    <button onclick="_toggleDrawer()" class="as-toolbar__item as-toolbar__toggle">
+      <i class="as-icon as-icon-hamburger as-title as-m--0"></i>
+    </button>
+
+    <div class="as-toolbar__group">
+      <div class="as-toolbar__item">
+        <img src="../common/logo.svg" alt="CARTO LOGO">
+      </div>
+
+      <nav class="as-toolbar__actions">
+        <ul>
+          <li class="as-toolbar__item">
+            <a href="http://www.carto.com">Home</a>
+          </li>
+          <li class="as-toolbar__item">
+            <a href="http://www.carto.com">About</a>
+          </li>
+          <li class="as-toolbar__item">
+            <i class="as-icon as-icon-magnify as-subheader as-m--0"></i>
+            <p class="as-toolbar__icon-text">Search</p>
+          </li>
+          <li class="as-toolbar__item">
+            <i class="as-icon as-icon-info as-subheader as-m--0"></i>
+            <p class="as-toolbar__icon-text">Help</p>
+          </li>
+          <li class="as-toolbar__item">
+            <i class="as-icon as-icon-twitter as-subheader as-m--0"></i>
+            <p class="as-toolbar__icon-text">Twitter</p>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <nav class="as-tabs"></nav>
+
+  <div class="as-content">
+    <aside class="as-sidebar as-sidebar--left">
+      <div class="as-container">
+        <div class="as-box as-title">
+          LEFT SIDEBAR
+        </div>
+      </div>
+    </aside>
+
+    <main class="as-main">
+      <div class="as-map-area">
+        <div class="map-area-text as-title">MAP</div>
+        <div id="map"></div>
+
+        <div class="as-map-panels">
+          <div class="as-panel as-panel--top as-panel--right">
+            <div class="as-title panel-text">MAP PANELS -> </div>
+            <div class="as-panel__element as-p--32 as-bg--warning"></div>
+            <div class="as-panel__element as-p--32 as-bg--success"></div>
+          </div>
+        </div>
+
+      </div>
+      <footer class="as-map-footer as-bg--complementary" style="height: 100px;">
+        <div class="as-box as-title as-color--type-04">
+          MAP FOOTER
+        </div>
+      </footer>
+    </main>
+
+    <aside class="as-sidebar as-sidebar--right">
+      <div class="as-container">
+        <div class="as-box as-title">
+          RIGHT SIDEBAR
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <!-- Basic CARTO-VL MAP -->
+
+  <script type="text/javascript" src="js/carto.js"></script>
+
+
+
+
+</body>
+
+</html>

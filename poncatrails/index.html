@@ -1,0 +1,194 @@
+
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Basic Layout</title>
+  <link rel="stylesheet" href="https://libs.cartocdn.com/airship-style/v2.4.1/airship.css">
+  <script type="module" src="https://libs.cartocdn.com/airship-components/v2.4.1/airship/airship.esm.js"></script>
+  <script nomodule="" src="https://libs.cartocdn.com/airship-components/v2.4.1/airship/airship.js"></script>
+  <!-- Include Icons -->
+  <link rel="stylesheet" href="https://libs.cartocdn.com/airship-icons/v2.4.1/icons.css">
+
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600,700|Open+Sans:300,400,600" rel="stylesheet">
+  <!-- Include Leaflet -->
+  <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"></script>
+  <link href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" rel="stylesheet">
+  <!-- Include CARTO.js -->
+  <script src="https://libs.cartocdn.com/carto.js/v4.2.0/carto.min.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:600" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+  <link href="https://carto.com/developers/carto-js/examples/maps/public/style.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol/dist/L.Control.Locate.min.css" />
+
+  <script src="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol/dist/L.Control.Locate.min.js" charset="utf-8"></script>
+
+  <script src="https://kit.fontawesome.com/086898e593.js" crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.js" integrity="sha512-ozq8xQKq6urvuU6jNgkfqAmT7jKN2XumbrX1JiB3TnF7tI48DPI4Gy1GXKD/V3EExgAs1V+pRO7vwtS1LHg0Gw==" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw-src.css" integrity="sha512-vJfMKRRm4c4UupyPwGUZI8U651mSzbmmPgR3sdE3LcwBPsdGeARvUM5EcSTg34DK8YIRiIo+oJwNfZPMKEQyug==" crossorigin="anonymous" />
+
+  <link href="css/style.css" rel="stylesheet">
+
+
+  <link rel="stylesheet" href="css/leaflet.zoomhome.css"/>
+  <script src="js/leaflet.zoomhome.min.js"></script>
+
+
+  <style>
+    .map-area-text {
+      position: absolute;
+      z-index: 10;
+      top: 24px;
+      left: 8px;
+      padding: 8px;
+      background-color: #FFF;
+    }
+
+    .panel-text {
+      margin-right: 8px;
+      padding: 8px;
+      background-color: #FFF;
+    }
+  </style>
+</head>
+
+<body class="as-app-body as-app">
+
+
+  <header class="as-toolbar">
+    <button onclick="_toggleDrawer()" class="as-toolbar__item as-toolbar__toggle">
+      <i class="as-icon as-icon-hamburger as-title as-m--0"></i>
+    </button>
+
+    <div class="as-toolbar__group">
+      <div class="as-toolbar__item">
+        <img src="/img/logo.png" alt="Neb G&P LOGO">
+      </div>
+
+      <nav class="as-toolbar__actions">
+        <ul>
+          <li class="as-toolbar__item">
+            <a href="http://outdoornebraska.gov/ponca/">Learn More</a>
+          </li>
+          <li class="as-toolbar__item">
+            <a href="https://nebraskastateparks.reserveamerica.com/camping/ponca-sp/r/campgroundDetails.do?contractCode=NE&parkId=230143">Reserve Your Stay</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <nav class="as-tabs"></nav>
+  <as-responsive-content>
+    <div class="as-content">
+      <aside class="as-sidebar as-sidebar--left" data-name="Utility Bar">
+        <div class="as-container as-container--border">
+            <section class="as-box">
+              <button aria-label="info" class="as-btn-primary as-btn--l as-m--4" onclick="showInfo()">
+                <i class="fas fa-info-circle"></i>
+              </button>
+              <button aria-label="filter" class="as-btn-primary as-btn--l as-m--4" onclick="showFilter()">
+                <i class="fas fa-filter"></i>
+              </button>
+              <button aria-label="report" class="as-btn-primary as-btn--l as-m--4" onclick='showReport()'>
+                <i class="fas fa-exclamation-triangle"></i>
+              </button>
+            </section>
+          </div>
+          <div class="as-container as-container--border">
+            <section class="as-box" id = "infoBox">
+              <h1 class="as-title">Ponca State Park Trail Guide</h1>
+              <p class="as-body">Ponca State Park, located in Northeastern Nebraska is a beautiful oasis nestled along the Missouri River. There are 22 miles of trails just waiting to be explored.  Feel free to explore the map to plan your visit and even report any issues you discover when you're on the trials. Have a great hike!</p>
+            </section>
+            <section class="as-box" id = "filterBox" style="display:none">
+              <h1 class="as-title">Filter the Map</h1>
+              <h5>Trail Difficulty</h5>
+              <as-dropdown
+                default-text="Select Difficulty"
+                can-clear="true">
+              </as-dropdown>
+              <h5>Park Activities</h5>
+              <as-dropdown id="siteActivitydropdown"
+                default-text="Select Activity"
+                can-clear="true">
+              </as-dropdown>
+              <h5>Park Facilities</h5>
+              <as-dropdown id="facilityDropdown"
+                default-text="Select Facility Type"
+                can-clear="true">
+              </as-dropdown>
+              <div class="as-box" role="group">
+                <button aria-label="apply" class="as-btn" id=filterButton>
+                  Apply Filter
+                </button>
+                <button disabled aria-label="clear" class="as-btn" id=clearButton>
+                  Clear Filter
+                </button>
+              </div>
+            </section>
+            <section class="as-box" id = "reportBox" style="display:none">
+              <h1 class="as-title">Report Trail Issues</h1>
+              <p>
+                <span class="as-caption">Type of Issue</span>
+                <as-dropdown id= "issueDropdown"
+                  default-text="Select Issue"
+                  can-clear="true">
+                </as-dropdown>
+              </p>
+              <p>
+                <span class="as-caption">Description</span>
+                <input class="as-input" type="text" placeholder="Hello there" id="descriptionInput">
+              </p>
+              <p>
+                <span class="as-caption">Trail Name</span>
+                <as-dropdown id= "trailDropdown"
+                  default-text="Select Trail"
+                  can-clear="true">
+                </as-dropdown>
+              </p>
+              <div class="as-box" role="group">
+                <button aria-label="locate" class="as-btn as-m--4" id=locationButton>
+                  Select Location & Submit
+                </button>
+                <button  aria-label="mylocate" class="as-btn as-m--4" id=mylocationBottun>
+                  Use Current Location & Submit
+                </button>
+              </div>
+            </section>
+            <as-legend
+              heading="Map Legend">
+              <as-legend-category slot="legends" orientation="vertical"></as-legend-category>
+              <span slot="footer">Data Source: <a href="https://data-outdoornebraska.opendata.arcgis.com/datasets/">Nebraska Game & Parks </a></span>
+            </as-legend>
+          </div>
+
+
+
+      </aside>
+
+      <main class="as-main">
+        <div class="as-map-area">
+          <div id="map"></div>
+
+        </div>
+
+      </main>
+
+
+    </div>
+  </as-responsive-content>
+  <!-- Basic CARTO-VL MAP -->
+
+  <script type="text/javascript" src="js/carto.js"></script>
+
+
+
+
+</body>
+
+</html>
