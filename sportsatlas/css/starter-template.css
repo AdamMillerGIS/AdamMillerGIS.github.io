@@ -137,13 +137,13 @@ div.content {
 
 
 a:link {
-  color: blue;
+  color:#FAD744;
   background-color: transparent;
   text-decoration: none;
 }
 
 a:visited {
-  color: pink;
+  color: #EF5455;
   background-color: transparent;
   text-decoration: none;
 }
