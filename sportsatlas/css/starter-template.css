@@ -130,7 +130,8 @@ div.content {
 }
 
 #date{
-  margin:5px;
+  margin:10px;
+  width: auto;
 }
 
 

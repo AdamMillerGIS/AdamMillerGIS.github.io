@@ -19,16 +19,7 @@ function main() {
     maxZoom: 16
   });
 
-  var greenIcon = L.icon({
-    iconUrl: '/img/NFL.svg',
 
-
-    iconSize:     [38, 95], // size of the icon
-    
-    iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
-    shadowAnchor: [4, 62],  // the same for the shadow
-    popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
-  });
 
 
 
@@ -40,11 +31,21 @@ function main() {
   populateDrowpDowndir2()
   populateDropDownSport()
   populateDropDownLeague()
+  createText(map)
 
   // L.tileLayer('http://tile.stamen.com/toner/{z}/{x}/{y}.png', {
   //   attribution: 'Stamen'
   // }).addTo(map);
 
+  function createText(map){
+    var source = L.control({position: 'bottomleft'});
+    source.onAdd = function(map){
+        var div = L.DomUtil.create('div', 'text-box');
+        div.innerHTML= '<i> Data courtesy of the <a href="https://hifld-geoplatform.opendata.arcgis.com/datasets/major-sport-venues?geometry=114.630%2C9.698%2C21.642%2C57.839">HIFLD</a> </i>';
+        return div;
+    }
+    source.addTo(map);
+  }
   /*Legend specific*/
   var legend = L.control({ position: "bottomright" });
 
